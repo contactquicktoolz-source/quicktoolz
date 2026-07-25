@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Text Compare - QuickToolz{% endblock %}
+{% block content %}
+<div class="container">
+<div class="tool-hero">
+    <h1>🔍 Text Compare</h1>
+    <p class="subtitle">Compare two blocks of text and see the differences.</p>
+
+    <form method="POST">
+        <label for="text_a">Original Text</label>
+        <textarea name="text_a" id="text_a" rows="6" placeholder="Paste original text here...">{{ text_a }}</textarea>
+
+        <label for="text_b">Changed Text</label>
+        <textarea name="text_b" id="text_b" rows="6" placeholder="Paste changed text here...">{{ text_b }}</textarea>
+
+        <button type="submit">Compare Text</button>
+    </form>
+
+    {% if result %}
+    <div class="result-box">
+        <p><strong>Differences:</strong></p>
+        <pre style="white-space: pre-wrap; word-break: break-word; font-family: monospace; font-size: 0.85rem;">{{ result }}</pre>
+    </div>
+    {% endif %}
+</div>
+</div>
+{% endblock %}

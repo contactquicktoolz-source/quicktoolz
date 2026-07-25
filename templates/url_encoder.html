@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}URL Encoder/Decoder - QuickToolz{% endblock %}
+{% block content %}
+<div class="container">
+<div class="tool-hero">
+    <h1>🔗 URL Encoder/Decoder</h1>
+    <p class="subtitle">Encode or decode URLs and text for safe use in links.</p>
+
+    {% if error %}
+    <p style="color:#f87171; margin-bottom:16px;">{{ error }}</p>
+    {% endif %}
+
+    <form method="POST">
+        <div class="quality-row">
+            <label>Mode</label>
+            <select name="mode">
+                <option value="encode" {% if mode == "encode" %}selected{% endif %}>Encode</option>
+                <option value="decode" {% if mode == "decode" %}selected{% endif %}>Decode</option>
+            </select>
+        </div>
+
+        <label for="text_input">Input Text / URL</label>
+        <textarea name="text_input" id="text_input" rows="6" placeholder="Enter text or URL here...">{{ input_text }}</textarea>
+        <button type="submit">Convert</button>
+    </form>
+
+    {% if result %}
+    <div class="result-box">
+        <p><strong>Result:</strong></p>
+        <pre style="white-space: pre-wrap; word-break: break-word; font-family: monospace; font-size: 0.9rem;">{{ result }}</pre>
+    </div>
+    {% endif %}
+</div>
+</div>
+{% endblock %}

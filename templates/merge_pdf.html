@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Merge PDF - QuickToolz{% endblock %}
+{% block content %}
+<div class="container">
+<div class="tool-hero">
+    <h1>📎 Merge PDF</h1>
+    <p class="subtitle">Combine multiple PDF files into one document.</p>
+    <p style="color:var(--muted); font-size:0.9rem;">Max file size: 32 MB</p>
+
+    {% if error %}
+    <p style="color:#f87171; margin-bottom:16px;">{{ error }}</p>
+    {% endif %}
+
+    <form method="POST" enctype="multipart/form-data">
+        <div class="upload-box">
+            <label for="pdfs" class="upload-btn" style="cursor:pointer; display:inline-block;">
+                Choose PDF Files
+            </label>
+            <input type="file" id="pdfs" name="pdfs" accept=".pdf" multiple style="display:none;" onchange="showFileName(this)">
+            <p id="fileName" style="margin-top:12px; color:var(--muted);"></p>
+            <p style="margin-top:8px; color:var(--muted); font-size:0.85rem;">Select 2 or more PDF files. They will be merged in the order selected.</p>
+
+            <button type="submit" class="upload-btn" style="margin-top:20px; font-size:1.1rem; padding:16px 40px;">Merge PDFs</button>
+        </div>
+    </form>
+</div>
+</div>
+
+<script>
+function showFileName(input) {
+    const fileNameEl = document.getElementById("fileName");
+    if (input.files.length > 0) {
+        fileNameEl.innerText = input.files.length + " file(s) selected";
+    }
+}
+</script>
+{% endblock %}

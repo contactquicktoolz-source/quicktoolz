@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}QuickToolz - Free Online Tools{% endblock %}</title>
+    <meta name="description" content="Free online tools: word counter, QR code generator, unit converter, image compressor and more.">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- Google AdSense (replace with your publisher ID once approved) -->
+    <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script> -->
+</head>
+<body>
+    <header class="navbar">
+        <a href="{{ url_for('home') }}" class="logo">⚡ QuickToolz</a>
+        <nav>
+            <a href="{{ url_for('jpg_to_pdf') }}">JPG to PDF</a>
+            <a href="{{ url_for('pdf_to_word') }}">PDF to Word</a>
+            <a href="{{ url_for('background_remover') }}">Background Remover</a>
+
+            <div class="dropdown">
+                <button class="dropdown-btn">More Tools ▾</button>
+                <div class="dropdown-content mega-menu">
+                    <div class="mega-col">
+                        <h4>PDF Tools</h4>
+                        <a href="{{ url_for('merge_pdf') }}">📎 Merge PDF</a>
+                        <a href="{{ url_for('split_pdf') }}">✂️ Split PDF</a>
+                        <a href="{{ url_for('compress_pdf') }}">🗜️ Compress PDF</a>
+                        <a href="{{ url_for('rotate_pdf') }}">🔄 Rotate PDF</a>
+                        <a href="{{ url_for('unlock_pdf') }}">🔓 Unlock PDF</a>
+                        <a href="{{ url_for('protect_pdf') }}">🔒 Protect PDF</a>
+                    </div>
+                    <div class="mega-col">
+                        <h4>Convert to PDF</h4>
+                        <a href="{{ url_for('word_to_pdf') }}">📄 Word to PDF</a>
+                        <a href="{{ url_for('jpg_to_pdf') }}">📄 JPG to PDF</a>
+                        <a href="{{ url_for('png_to_pdf') }}">📄 PNG to PDF</a>
+                    </div>
+                    <div class="mega-col">
+                        <h4>Convert from PDF</h4>
+                        <a href="{{ url_for('pdf_to_word') }}">📝 PDF to Word</a>
+                        <a href="{{ url_for('pdf_to_jpg') }}">🖼️ PDF to JPG</a>
+                        <a href="{{ url_for('pdf_to_png') }}">🖼️ PDF to PNG</a>
+                    </div>
+                    <div class="mega-col">
+                        <h4>Image Tools</h4>
+                        <a href="{{ url_for('image_compressor') }}">🖼️ Image Compressor</a>
+                        <a href="{{ url_for('background_remover') }}">✂️ Background Remover</a>
+                        <a href="{{ url_for('jpg_to_png') }}">🖼️ JPG to PNG</a>
+                        <a href="{{ url_for('png_to_jpg') }}">🖼️ PNG to JPG</a>
+                        <a href="{{ url_for('webp_to_jpg') }}">🖼️ WEBP to JPG</a>
+                    </div>
+                    <div class="mega-col">
+                        <h4>Utilities</h4>
+                        <a href="{{ url_for('word_counter') }}">📝 Word Counter</a>
+                        <a href="{{ url_for('qr_generator') }}">📱 QR Generator</a>
+                        <a href="{{ url_for('unit_converter') }}">📏 Unit Converter</a>
+                        <a href="{{ url_for('temperature_converter') }}">🌡️ Temp Converter</a>
+                        <a href="{{ url_for('percentage_calculator') }}">🧮 Percentage Calculator</a>
+                        <a href="{{ url_for('password_generator') }}">🔒 Password Generator</a>
+                        <a href="{{ url_for('audio_converter') }}">🎵 Audio Converter</a>
+                    </div>
+                    <div class="mega-col">
+                        <h4>Dev Tools</h4>
+                        <a href="{{ url_for('json_formatter') }}">{ } JSON Formatter</a>
+                        <a href="{{ url_for('base64_tool') }}">🔤 Base64 Encode/Decode</a>
+                        <a href="{{ url_for('url_encoder') }}">🔗 URL Encoder</a>
+                        <a href="{{ url_for('uuid_generator') }}">🆔 UUID Generator</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const dropdownBtn = document.querySelector(".dropdown-btn");
+        const dropdown = document.querySelector(".dropdown");
+
+        dropdownBtn.addEventListener("click", function (e) {
+            e.stopPropagation();
+            dropdown.classList.toggle("open");
+        });
+
+        document.addEventListener("click", function (e) {
+            if (!dropdown.contains(e.target)) {
+                dropdown.classList.remove("open");
+            }
+        });
+    });
+    </script>
+
+    <!-- Floating back-to-tools button -->
+    <a href="{{ url_for('home') }}#tools" class="back-to-tools-btn" title="Back to all tools">
+        ⬅ All Tools
+    </a>
+
+    <!-- Ad slot: top banner -->
+    <div class="ad-slot ad-top">Ad space (top banner)</div>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Ad slot: bottom banner -->
+    <div class="ad-slot ad-bottom">Ad space (bottom banner)</div>
+
+    <footer>
+        <p>&copy; 2026 QuickToolz. All tools are free to use.</p>
+        <p style="margin-top:8px;">
+            <a href="{{ url_for('about') }}" style="color:var(--muted); margin:0 10px; text-decoration:none;">About Us</a>
+            <a href="{{ url_for('privacy_policy') }}" style="color:var(--muted); margin:0 10px; text-decoration:none;">Privacy Policy</a>
+
+    </footer>
+</body>
+</html>

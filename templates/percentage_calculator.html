@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}Percentage Calculator - QuickToolz{% endblock %}
+{% block content %}
+<div class="container">
+<div class="tool-hero">
+    <h1>🧮 Percentage Calculator</h1>
+    <p class="subtitle">Quickly calculate percentages, percentage change, and more.</p>
+
+    <form method="POST">
+        <div class="upload-box">
+            <div class="quality-row">
+                <label>Calculation Type</label>
+                <select name="calc_type" onchange="this.form.submit()">
+                    <option value="percent_of" {% if calc_type == "percent_of" %}selected{% endif %}>What is X% of Y?</option>
+                    <option value="is_what_percent" {% if calc_type == "is_what_percent" %}selected{% endif %}>X is what % of Y?</option>
+                    <option value="percent_change" {% if calc_type == "percent_change" %}selected{% endif %}>% change from X to Y</option>
+                </select>
+            </div>
+
+            <div class="quality-row">
+                <label>
+                    {% if calc_type == "percent_of" %}X (percentage)
+                    {% elif calc_type == "is_what_percent" %}X (part)
+                    {% else %}X (original value){% endif %}
+                </label>
+                <input type="number" step="any" name="value1" value="{{ value1 if value1 is not none else '' }}" required>
+            </div>
+
+            <div class="quality-row">
+                <label>
+                    {% if calc_type == "percent_of" %}Y (total value)
+                    {% elif calc_type == "is_what_percent" %}Y (total)
+                    {% else %}Y (new value){% endif %}
+                </label>
+                <input type="number" step="any" name="value2" value="{{ value2 if value2 is not none else '' }}" required>
+            </div>
+
+            <button type="submit" class="upload-btn" style="font-size:1.1rem; padding:16px 40px;">Calculate</button>
+        </div>
+    </form>
+
+    {% if result is not none %}
+    <div class="result-box">
+        <p><strong>Result:</strong>
+            {% if result is number %}
+                {{ "%.2f"|format(result) }}{% if calc_type != "percent_of" %}%{% endif %}
+            {% else %}
+                {{ result }}
+            {% endif %}
+        </p>
+    </div>
+    {% endif %}
+</div>
+</div>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}Audio Converter - QuickToolz{% endblock %}
+{% block content %}
+<div class="container">
+<div class="tool-hero">
+    <h1>🎵 Audio Converter</h1>
+    <p class="subtitle">Convert audio between MP3, WAV, AAC, FLAC and OGG formats.</p>
+    <p style="color:var(--muted); font-size:0.9rem;">Max file size: 32 MB &nbsp;•&nbsp; Max audio length: 20 minutes</p>
+
+    {% if error %}
+    <p style="color:#f87171; margin-bottom:16px;">{{ error }}</p>
+    {% endif %}
+
+    <form method="POST" enctype="multipart/form-data">
+        <div class="upload-box">
+            <label for="audio" class="upload-btn" style="cursor:pointer; display:inline-block;">
+                Choose Audio File
+            </label>
+            <input type="file" id="audio" name="audio" accept=".mp3,.wav,.aac,.flac,.ogg" style="display:none;" onchange="showFileName(this)">
+            <p id="fileName" style="margin-top:12px; color:var(--muted);"></p>
+
+            <div class="quality-row" style="margin-top:16px;">
+                <label>Convert to:</label>
+                <select name="target_format" required>
+                    <option value="mp3">MP3</option>
+                    <option value="wav">WAV</option>
+                    <option value="aac">AAC</option>
+                    <option value="flac">FLAC</option>
+                    <option value="ogg">OGG</option>
+                </select>
+            </div>
+
+            <button type="submit" class="upload-btn" style="margin-top:20px; font-size:1.1rem; padding:16px 40px;">Convert Audio</button>
+        </div>
+    </form>
+
+    <p class="hint">Supported input formats: MP3, WAV, AAC, FLAC, OGG</p>
+</div>
+</div>
+
+<script>
+function showFileName(input) {
+    const fileNameEl = document.getElementById("fileName");
+    if (input.files.length > 0) {
+        fileNameEl.innerText = "Selected: " + input.files[0].name;
+    }
+}
+</script>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}Resize Image - QuickToolz{% endblock %}
+{% block content %}
+<div class="container">
+<div class="tool-hero">
+    <h1>📐 Resize Image</h1>
+    <p class="subtitle">Resize your image to exact dimensions.</p>
+    <p style="color:var(--muted); font-size:0.9rem;">Max file size: 32 MB</p>
+
+    {% if error %}
+    <p style="color:#f87171; margin-bottom:16px;">{{ error }}</p>
+    {% endif %}
+
+    <form method="POST" enctype="multipart/form-data">
+        <div class="upload-box">
+            <label for="image" class="upload-btn" style="cursor:pointer; display:inline-block;">
+                Choose Image
+            </label>
+            <input type="file" id="image" name="image" accept=".jpg,.jpeg,.png,.webp" style="display:none;" onchange="showFileName(this)">
+            <p id="fileName" style="margin-top:12px; color:var(--muted);"></p>
+
+            <div class="quality-row" style="margin-top:16px;">
+                <label>Width (px)</label>
+                <input type="number" name="width" value="800" min="1" required>
+            </div>
+            <div class="quality-row">
+                <label>Height (px)</label>
+                <input type="number" name="height" value="600" min="1" required>
+            </div>
+            <div class="quality-row" style="display:flex; align-items:center; gap:8px;">
+                <input type="checkbox" name="keep_ratio" id="keep_ratio" checked style="width:auto;">
+                <label for="keep_ratio" style="margin:0;">Keep aspect ratio (fit within given size)</label>
+            </div>
+
+            <button type="submit" class="upload-btn" style="margin-top:20px; font-size:1.1rem; padding:16px 40px;">Resize Image</button>
+        </div>
+    </form>
+</div>
+</div>
+
+<script>
+function showFileName(input) {
+    const fileNameEl = document.getElementById("fileName");
+    if (input.files.length > 0) {
+        fileNameEl.innerText = "Selected: " + input.files[0].name;
+    }
+}
+</script>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}Error - QuickToolz{% endblock %}
+{% block content %}
+<div class="container">
+<div class="tool-hero">
+    <h1>⚠️ Oops!</h1>
+    <p class="subtitle">{{ message }}</p>
+    <a href="{{ url_for('home') }}" class="upload-btn" style="text-decoration:none; display:inline-block;">Go Back Home</a>
+</div>
+</div>
+{% endblock %}

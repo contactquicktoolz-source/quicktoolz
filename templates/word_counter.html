@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Word Counter - QuickToolz{% endblock %}
+{% block content %}
+<div class="container">
+<div class="tool-hero">
+    <h1>📝 Word Counter</h1>
+    <p class="subtitle">Count words, characters and sentences instantly.</p>
+
+    <form method="POST">
+        <div class="upload-box">
+            <textarea name="text" rows="10" placeholder="Paste or type your text here..." style="width:100%;">{{ text }}</textarea>
+            <button type="submit" class="upload-btn" style="font-size:1.1rem; padding:16px 40px;">Count</button>
+        </div>
+    </form>
+
+    {% if result %}
+    <div class="result-box" style="text-align:left;">
+        <p><strong>Words:</strong> {{ result.words }}</p>
+        <p><strong>Characters (with spaces):</strong> {{ result.chars }}</p>
+        <p><strong>Characters (no spaces):</strong> {{ result.chars_no_space }}</p>
+        <p><strong>Sentences:</strong> {{ result.sentences }}</p>
+    </div>
+    {% endif %}
+</div>
+</div>
+{% endblock %}

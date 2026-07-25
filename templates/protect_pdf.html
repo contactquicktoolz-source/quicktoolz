@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Protect PDF - QuickToolz{% endblock %}
+{% block content %}
+<div class="container">
+<div class="tool-hero">
+    <h1>🔒 Protect PDF</h1>
+    <p class="subtitle">Add password protection to your PDF.</p>
+    <p style="color:var(--muted); font-size:0.9rem;">Max file size: 32 MB</p>
+
+    {% if error %}
+    <p style="color:#f87171; margin-bottom:16px;">{{ error }}</p>
+    {% endif %}
+
+    <form method="POST" enctype="multipart/form-data">
+        <div class="upload-box">
+            <label for="pdf_file" class="upload-btn" style="cursor:pointer; display:inline-block;">
+                Choose PDF File
+            </label>
+            <input type="file" id="pdf_file" name="pdf_file" accept=".pdf" style="display:none;" onchange="showFileName(this)">
+            <p id="fileName" style="margin-top:12px; color:var(--muted);"></p>
+
+            <div class="quality-row" style="margin-top:16px;">
+                <label>Set Password</label>
+                <input type="password" name="password" placeholder="Enter a password" required>
+            </div>
+
+            <button type="submit" class="upload-btn" style="margin-top:20px; font-size:1.1rem; padding:16px 40px;">Protect PDF</button>
+        </div>
+    </form>
+</div>
+</div>
+
+<script>
+function showFileName(input) {
+    const fileNameEl = document.getElementById("fileName");
+    if (input.files.length > 0) {
+        fileNameEl.innerText = "Selected: " + input.files[0].name;
+    }
+}
+</script>
+{% endblock %}

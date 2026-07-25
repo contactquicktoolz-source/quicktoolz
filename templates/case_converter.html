@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Case Converter - QuickToolz{% endblock %}
+{% block content %}
+<div class="container">
+<div class="tool-hero">
+    <h1>🔠 Case Converter</h1>
+    <p class="subtitle">Convert text between uppercase, lowercase, title case and more.</p>
+
+    <form method="POST">
+        <div class="quality-row">
+            <label>Convert to</label>
+            <select name="case_type">
+                <option value="upper" {% if case_type == "upper" %}selected{% endif %}>UPPERCASE</option>
+                <option value="lower" {% if case_type == "lower" %}selected{% endif %}>lowercase</option>
+                <option value="title" {% if case_type == "title" %}selected{% endif %}>Title Case</option>
+                <option value="sentence" {% if case_type == "sentence" %}selected{% endif %}>Sentence case</option>
+                <option value="capitalize" {% if case_type == "capitalize" %}selected{% endif %}>Capitalize first letter</option>
+                <option value="alternating" {% if case_type == "alternating" %}selected{% endif %}>aLtErNaTiNg cAsE</option>
+            </select>
+        </div>
+
+        <label for="text_input">Input Text</label>
+        <textarea name="text_input" id="text_input" rows="6" placeholder="Enter text here...">{{ input_text }}</textarea>
+        <button type="submit">Convert</button>
+    </form>
+
+    {% if result %}
+    <div class="result-box">
+        <p><strong>Result:</strong></p>
+        <pre style="white-space: pre-wrap; word-break: break-word; font-family: inherit; font-size: 0.95rem;">{{ result }}</pre>
+    </div>
+    {% endif %}
+</div>
+</div>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}QR Code Generator - QuickToolz{% endblock %}
+{% block content %}
+<div class="container">
+<div class="tool-hero">
+    <h1>📱 QR Code Generator</h1>
+    <p class="subtitle">Turn any text or link into a downloadable QR code.</p>
+
+    <form method="POST">
+        <div class="upload-box">
+            <input type="text" name="qr_text" placeholder="Enter text or URL" required style="width:100%; max-width:400px;">
+            <button type="submit" class="upload-btn" style="font-size:1.1rem; padding:16px 40px;">Generate & Download QR</button>
+        </div>
+    </form>
+    <p class="hint">Your QR code will download automatically as a PNG file.</p>
+</div>
+</div>
+{% endblock %}

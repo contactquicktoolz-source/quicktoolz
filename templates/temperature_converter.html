@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}Temperature Converter - QuickToolz{% endblock %}
+{% block content %}
+<div class="container">
+<div class="tool-hero">
+    <h1>🌡️ Temperature Converter</h1>
+    <p class="subtitle">Celsius, Fahrenheit and Kelvin conversions.</p>
+
+    <form method="POST">
+        <div class="upload-box">
+            <div class="quality-row">
+                <label>Value</label>
+                <input type="number" step="any" name="value" value="{{ value }}" required>
+            </div>
+
+            <div class="quality-row">
+                <label>From</label>
+                <select name="from_unit">
+                    {% for unit in ["Celsius", "Fahrenheit", "Kelvin"] %}
+                    <option value="{{ unit }}" {% if unit == from_unit %}selected{% endif %}>{{ unit }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="quality-row">
+                <label>To</label>
+                <select name="to_unit">
+                    {% for unit in ["Celsius", "Fahrenheit", "Kelvin"] %}
+                    <option value="{{ unit }}" {% if unit == to_unit %}selected{% endif %}>{{ unit }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <button type="submit" class="upload-btn" style="font-size:1.1rem; padding:16px 40px;">Convert</button>
+        </div>
+    </form>
+
+    {% if result is not none %}
+    <div class="result-box">
+        <p><strong>Result:</strong> {{ result }}</p>
+    </div>
+    {% endif %}
+</div>
+</div>
+{% endblock %}

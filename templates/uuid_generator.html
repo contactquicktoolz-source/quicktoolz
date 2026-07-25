@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}UUID Generator - QuickToolz{% endblock %}
+{% block content %}
+<div class="container">
+<div class="tool-hero">
+    <h1>🆔 UUID Generator</h1>
+    <p class="subtitle">Generate random UUID (v4) identifiers instantly.</p>
+
+    <form method="POST">
+        <div class="quality-row">
+            <label>How many UUIDs?</label>
+            <input type="number" name="count" min="1" max="50" value="{{ count }}">
+        </div>
+        <button type="submit">Generate UUIDs</button>
+    </form>
+
+    {% if uuids %}
+    <div class="result-box">
+        <p><strong>Generated UUIDs:</strong></p>
+        <pre style="white-space: pre-wrap; word-break: break-word; font-family: monospace; font-size: 0.9rem;">{% for u in uuids %}{{ u }}
+{% endfor %}</pre>
+    </div>
+    {% endif %}
+</div>
+</div>
+{% endblock %}

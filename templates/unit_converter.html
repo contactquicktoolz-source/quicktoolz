@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %}Unit Converter - QuickToolz{% endblock %}
+{% block content %}
+<div class="container">
+<div class="tool-hero">
+    <h1>📏 Unit Converter</h1>
+    <p class="subtitle">Convert length and weight units in a click.</p>
+
+    <form method="POST">
+        <div class="upload-box">
+            <div class="quality-row">
+                <label>Category</label>
+                <select name="category" onchange="this.form.submit()">
+                    {% for cat in conversions.keys() %}
+                    <option value="{{ cat }}" {% if cat == category %}selected{% endif %}>{{ cat|capitalize }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="quality-row">
+                <label>Value</label>
+                <input type="number" step="any" name="value" value="{{ value }}" required>
+            </div>
+
+            <div class="quality-row">
+                <label>From</label>
+                <select name="from_unit">
+                    {% for unit in conversions[category].keys() %}
+                    <option value="{{ unit }}" {% if unit == from_unit %}selected{% endif %}>{{ unit }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="quality-row">
+                <label>To</label>
+                <select name="to_unit">
+                    {% for unit in conversions[category].keys() %}
+                    <option value="{{ unit }}" {% if unit == to_unit %}selected{% endif %}>{{ unit }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <button type="submit" class="upload-btn" style="font-size:1.1rem; padding:16px 40px;">Convert</button>
+        </div>
+    </form>
+
+    {% if result is not none %}
+    <div class="result-box">
+        <p><strong>Result:</strong> {{ result }}</p>
+    </div>
+    {% endif %}
+</div>
+</div>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}JSON Formatter - QuickToolz{% endblock %}
+{% block content %}
+<div class="container">
+<div class="tool-hero">
+    <h1>{ } JSON Formatter</h1>
+    <p class="subtitle">Format and validate your JSON instantly.</p>
+
+    {% if error %}
+    <p style="color:#f87171; margin-bottom:16px;">{{ error }}</p>
+    {% endif %}
+
+    <form method="POST">
+        <label for="json_input">Paste your JSON</label>
+        <textarea name="json_input" id="json_input" rows="10" placeholder='{"name": "example", "value": 123}' style="font-family: monospace;">{{ input_text }}</textarea>
+        <button type="submit">Format JSON</button>
+    </form>
+
+    {% if result %}
+    <div class="result-box">
+        <p><strong>Formatted JSON:</strong></p>
+        <pre style="white-space: pre-wrap; word-break: break-word; font-family: monospace; font-size: 0.9rem;">{{ result }}</pre>
+    </div>
+    {% endif %}
+</div>
+</div>
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block title %}Image Compressor - QuickToolz{% endblock %}
+{% block content %}
+<div class="container">
+<div class="tool-hero">
+    <h1>🖼️ Compress IMAGE</h1>
+    <p class="subtitle">Choose how small you want your image, and we'll compress it to match. Fast, free, no sign-up needed.</p>
+
+    <form method="POST" enctype="multipart/form-data">
+        <div class="upload-box">
+            <label for="image-input" class="upload-btn">Select Image</label>
+            <input type="file" id="image-input" name="image" accept="image/*" required
+                   style="display:none" onchange="showFileInfo(this)">
+            <span id="file-label" class="file-name">or drop image here</span>
+            <span id="original-size" class="file-name" style="display:none; font-weight:700; color:#a5b4fc;"></span>
+
+            <div class="quality-row">
+                <label>Target file size</label>
+                <div style="display:flex; gap:8px;">
+                    <input type="number" name="target_size" placeholder="e.g. 200" min="1" step="any" required style="flex:1;">
+                    <select name="size_unit" style="width:90px;">
+                        <option value="KB">KB</option>
+                        <option value="MB">MB</option>
+                    </select>
+                </div>
+            </div>
+
+            <button type="submit" class="upload-btn" style="font-size:1.1rem; padding:16px 40px;">Compress & Download</button>
+        </div>
+    </form>
+    <p class="hint">We'll get as close as possible to your target size without going over. Max upload size: 32 MB.</p>
+</div>
+</div>
+
+<script>
+function showFileInfo(input) {
+    const label = document.getElementById('file-label');
+    const sizeSpan = document.getElementById('original-size');
+
+    if (input.files && input.files[0]) {
+        const file = input.files[0];
+        label.innerText = file.name;
+
+        const sizeKB = file.size / 1024;
+        let sizeText;
+        if (sizeKB >= 1024) {
+            sizeText = "Original size: " + (sizeKB / 1024).toFixed(2) + " MB";
+        } else {
+            sizeText = "Original size: " + sizeKB.toFixed(0) + " KB";
+        }
+        sizeSpan.innerText = sizeText;
+        sizeSpan.style.display = 'block';
+    } else {
+        label.innerText = 'or drop image here';
+        sizeSpan.style.display = 'none';
+    }
+}
+</script>
+{% endblock %}
