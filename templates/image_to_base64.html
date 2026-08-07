@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Image to Base64 - QuickToolz{% endblock %}
+{% block content %}
+<div class="container">
+<div class="tool-hero">
+    <h1>🖼️ Image to Base64</h1>
+    <p class="subtitle">Convert an image to a Base64 string instantly.</p>
+
+    <div class="upload-box">
+        <label for="imgInput" class="upload-btn" style="cursor:pointer;">Choose Image</label>
+        <input type="file" id="imgInput" accept="image/*" style="display:none;" onchange="convertImage(this)">
+    </div>
+    <div class="result-box" id="imgResult" style="display:none; text-align:left; word-break:break-all; max-height:300px; overflow-y:auto;"></div>
+    <button id="copyBtn" style="display:none; margin-top:10px;" onclick="copyBase64()">Copy to Clipboard</button>
+</div>
+</div>
+
+<script>
+let base64String = "";
+function convertImage(input) {
+    const file = input.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function (e) {
+        base64String = e.target.result;
+        document.getElementById("imgResult").textContent = base64String;
+        document.getElementById("imgResult").style.display = "block";
+        document.getElementById("copyBtn").style.display = "inline-block";
+    };
+    reader.readAsDataURL(file);
+}
+function copyBase64() {
+    navigator.clipboard.writeText(base64String);
+}
+</script>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}CSS Minifier - QuickToolz{% endblock %}
+{% block content %}
+<div class="container">
+<div class="tool-hero">
+    <h1>🗜️ CSS Minifier</h1>
+    <p class="subtitle">Paste CSS, get minified output instantly.</p>
+
+    <form onsubmit="return false;">
+        <textarea id="cssInput" rows="8" placeholder="Paste your CSS here..." oninput="minifyCss()"></textarea>
+    </form>
+    <div class="result-box" id="cssResult" style="display:none; text-align:left; word-break:break-all;"></div>
+</div>
+</div>
+
+<script>
+function minifyCss() {
+    const input = document.getElementById("cssInput").value;
+    const box = document.getElementById("cssResult");
+    if (!input.trim()) { box.style.display = "none"; return; }
+
+    const minified = input
+        .replace(/\/\*[\s\S]*?\*\//g, "")
+        .replace(/\s*([{}:;,])\s*/g, "$1")
+        .replace(/\n/g, "")
+        .replace(/;}/g, "}")
+        .trim();
+
+    box.textContent = minified;
+    box.style.display = "block";
+}
+</script>
+{% endblock %}

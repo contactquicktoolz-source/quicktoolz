@@ -25,55 +25,55 @@
             <h3>PDF to Word</h3>
             <p>Convert PDF files back to editable Word documents.</p>
         </a>
-        <a class="tool-card" href="{{ url_for('pdf_to_jpg') }}">
-            <span class="icon-badge icon-orange">🖼️</span>
-            <h3>PDF to JPG</h3>
-            <p>Convert PDF pages into JPG images instantly.</p>
+        <a class="tool-card" href="{{ url_for('merge_pdf') }}">
+            <span class="icon-badge icon-red">📎</span>
+            <h3>Merge PDF</h3>
+            <p>Combine multiple PDF files into one document.</p>
         </a>
-        <a class="tool-card" href="{{ url_for('jpg_to_pdf') }}">
-            <span class="icon-badge icon-teal">📄</span>
-            <h3>JPG to PDF</h3>
-            <p>Convert JPG images into a single PDF file.</p>
+        <a class="tool-card" href="{{ url_for('split_pdf') }}">
+            <span class="icon-badge icon-orange">✂️</span>
+            <h3>Split PDF</h3>
+            <p>Split a PDF into individual pages.</p>
         </a>
-        <a class="tool-card" href="{{ url_for('background_remover') }}">
-            <span class="icon-badge icon-red">✂️</span>
-            <h3>Background Remover</h3>
-            <p>Remove image backgrounds automatically using AI.</p>
-        </a>
-        <a class="tool-card" href="{{ url_for('password_generator') }}">
-            <span class="icon-badge icon-purple">🔒</span>
-            <h3>Password Generator</h3>
-            <p>Generate strong, random, secure passwords instantly.</p>
-        </a>
-        <a class="tool-card" href="{{ url_for('audio_converter') }}">
-            <span class="icon-badge icon-purple">🎵</span>
-            <h3>Audio Converter</h3>
-            <p>Convert audio between MP3, WAV, AAC, FLAC and OGG.</p>
+        <a class="tool-card" href="{{ url_for('compress_pdf') }}">
+            <span class="icon-badge icon-purple">🗜️</span>
+            <h3>Compress PDF</h3>
+            <p>Reduce PDF file size without losing quality.</p>
         </a>
         <a class="tool-card" href="{{ url_for('image_compressor') }}">
             <span class="icon-badge icon-blue">🖼️</span>
             <h3>Image Compressor</h3>
             <p>Shrink image file size while keeping good quality.</p>
         </a>
+        <a class="tool-card" href="{{ url_for('jpg_to_pdf') }}">
+            <span class="icon-badge icon-teal">📄</span>
+            <h3>JPG to PDF</h3>
+            <p>Convert JPG images into a single PDF file.</p>
+        </a>
+        <a class="tool-card" href="{{ url_for('pdf_to_jpg') }}">
+            <span class="icon-badge icon-orange">🖼️</span>
+            <h3>PDF to JPG</h3>
+            <p>Convert PDF pages into JPG images instantly.</p>
+        </a>
+        <a class="tool-card" href="{{ url_for('background_remover') }}">
+            <span class="icon-badge icon-red">✂️</span>
+            <h3>Background Remover</h3>
+            <p>Remove image backgrounds automatically using AI.</p>
+        </a>
         <a class="tool-card" href="{{ url_for('qr_generator') }}">
             <span class="icon-badge icon-purple">📱</span>
             <h3>QR Code Generator</h3>
             <p>Turn any text or link into a downloadable QR code.</p>
         </a>
-        <a class="tool-card" href="{{ url_for('word_counter') }}">
-            <span class="icon-badge icon-red">📝</span>
-            <h3>Word Counter</h3>
-            <p>Count words, characters and sentences instantly.</p>
+        <a class="tool-card" href="{{ url_for('password_generator') }}">
+            <span class="icon-badge icon-purple">🔒</span>
+            <h3>Password Generator</h3>
+            <p>Generate strong, random, secure passwords instantly.</p>
         </a>
-        <a class="tool-card" href="{{ url_for('unit_converter') }}">
-            <span class="icon-badge icon-teal">📏</span>
-            <h3>Unit Converter</h3>
-            <p>Convert length and weight units in a click.</p>
-        </a>
-        <a class="tool-card" href="{{ url_for('temperature_converter') }}">
-            <span class="icon-badge icon-orange">🌡️</span>
-            <h3>Temperature Converter</h3>
-            <p>Celsius, Fahrenheit and Kelvin conversions.</p>
+        <a class="tool-card" href="{{ url_for('png_to_pdf') }}">
+            <span class="icon-badge icon-teal">📄</span>
+            <h3>PNG to PDF</h3>
+            <p>Convert PNG images into a single PDF file.</p>
         </a>
     </div>
 
@@ -107,15 +107,15 @@
         </div>
 
         <a href="#tools" class="promo-cta">
-            Explore all 36 tools →
+            Explore all 51 tools →
         </a>
     </div>
 
     <div class="tool-grid">
-        <a class="tool-card" href="{{ url_for('percentage_calculator') }}">
-            <span class="icon-badge icon-teal">🧮</span>
-            <h3>Percentage Calculator</h3>
-            <p>Calculate percentages, percentage change and more.</p>
+        <a class="tool-card" href="{{ url_for('pdf_to_png') }}">
+            <span class="icon-badge icon-orange">🖼️</span>
+            <h3>PDF to PNG</h3>
+            <p>Convert PDF pages into PNG images instantly.</p>
         </a>
         <a class="tool-card" href="{{ url_for('jpg_to_png') }}">
             <span class="icon-badge icon-blue">🖼️</span>
@@ -132,21 +132,6 @@
             <h3>WEBP to JPG</h3>
             <p>Convert WEBP images to JPG format instantly.</p>
         </a>
-        <a class="tool-card" href="{{ url_for('merge_pdf') }}">
-            <span class="icon-badge icon-red">📎</span>
-            <h3>Merge PDF</h3>
-            <p>Combine multiple PDF files into one document.</p>
-        </a>
-        <a class="tool-card" href="{{ url_for('split_pdf') }}">
-            <span class="icon-badge icon-orange">✂️</span>
-            <h3>Split PDF</h3>
-            <p>Split a PDF into individual pages.</p>
-        </a>
-        <a class="tool-card" href="{{ url_for('compress_pdf') }}">
-            <span class="icon-badge icon-purple">🗜️</span>
-            <h3>Compress PDF</h3>
-            <p>Reduce PDF file size without losing quality.</p>
-        </a>
         <a class="tool-card" href="{{ url_for('rotate_pdf') }}">
             <span class="icon-badge icon-blue">🔄</span>
             <h3>Rotate PDF</h3>
@@ -162,15 +147,30 @@
             <h3>Protect PDF</h3>
             <p>Add password protection to your PDF.</p>
         </a>
-        <a class="tool-card" href="{{ url_for('pdf_to_png') }}">
-            <span class="icon-badge icon-orange">🖼️</span>
-            <h3>PDF to PNG</h3>
-            <p>Convert PDF pages into PNG images instantly.</p>
+        <a class="tool-card" href="{{ url_for('word_counter') }}">
+            <span class="icon-badge icon-red">📝</span>
+            <h3>Word Counter</h3>
+            <p>Count words, characters and sentences instantly.</p>
         </a>
-        <a class="tool-card" href="{{ url_for('png_to_pdf') }}">
-            <span class="icon-badge icon-teal">📄</span>
-            <h3>PNG to PDF</h3>
-            <p>Convert PNG images into a single PDF file.</p>
+        <a class="tool-card" href="{{ url_for('unit_converter') }}">
+            <span class="icon-badge icon-teal">📏</span>
+            <h3>Unit Converter</h3>
+            <p>Convert length and weight units in a click.</p>
+        </a>
+        <a class="tool-card" href="{{ url_for('temperature_converter') }}">
+            <span class="icon-badge icon-orange">🌡️</span>
+            <h3>Temperature Converter</h3>
+            <p>Celsius, Fahrenheit and Kelvin conversions.</p>
+        </a>
+        <a class="tool-card" href="{{ url_for('percentage_calculator') }}">
+            <span class="icon-badge icon-teal">🧮</span>
+            <h3>Percentage Calculator</h3>
+            <p>Calculate percentages, percentage change and more.</p>
+        </a>
+        <a class="tool-card" href="{{ url_for('audio_converter') }}">
+            <span class="icon-badge icon-purple">🎵</span>
+            <h3>Audio Converter</h3>
+            <p>Convert audio between MP3, WAV, AAC, FLAC and OGG.</p>
         </a>
     </div>
 
@@ -187,6 +187,51 @@
     </div>
 
     <div class="tool-grid">
+        <a class="tool-card" href="{{ url_for('crop_image') }}">
+            <span class="icon-badge icon-red">✂️</span>
+            <h3>Crop Image</h3>
+            <p>Crop your image to exact position and size.</p>
+        </a>
+        <a class="tool-card" href="{{ url_for('resize_image') }}">
+            <span class="icon-badge icon-blue">📐</span>
+            <h3>Resize Image</h3>
+            <p>Resize your image to exact dimensions.</p>
+        </a>
+        <a class="tool-card" href="{{ url_for('rotate_image') }}">
+            <span class="icon-badge icon-orange">🔄</span>
+            <h3>Rotate Image</h3>
+            <p>Rotate your image to any angle.</p>
+        </a>
+        <a class="tool-card" href="{{ url_for('watermark_image') }}">
+            <span class="icon-badge icon-teal">💧</span>
+            <h3>Watermark Image</h3>
+            <p>Add a text watermark to your image.</p>
+        </a>
+        <a class="tool-card" href="{{ url_for('blur_image') }}">
+            <span class="icon-badge icon-purple">🌫️</span>
+            <h3>Blur Image</h3>
+            <p>Apply a smooth blur effect to your image.</p>
+        </a>
+        <a class="tool-card" href="{{ url_for('currency_converter') }}">
+            <span class="icon-badge icon-teal">💱</span>
+            <h3>Currency Converter</h3>
+            <p>Convert between currencies using live exchange rates.</p>
+        </a>
+        <a class="tool-card" href="{{ url_for('emi_calculator') }}">
+            <span class="icon-badge icon-blue">🏦</span>
+            <h3>EMI Calculator</h3>
+            <p>Calculate your monthly loan EMI instantly.</p>
+        </a>
+        <a class="tool-card" href="{{ url_for('age_calculator') }}">
+            <span class="icon-badge icon-red">🎂</span>
+            <h3>Age Calculator</h3>
+            <p>Find your exact age in years, months, and days.</p>
+        </a>
+        <a class="tool-card" href="{{ url_for('barcode_generator') }}">
+            <span class="icon-badge icon-purple">🔢</span>
+            <h3>Barcode Generator</h3>
+            <p>Turn any text or number into a barcode instantly.</p>
+        </a>
         <a class="tool-card" href="{{ url_for('json_formatter') }}">
             <span class="icon-badge icon-orange">{ }</span>
             <h3>JSON Formatter</h3>
@@ -202,6 +247,9 @@
             <h3>URL Encoder</h3>
             <p>Encode or decode URLs for safe use in links.</p>
         </a>
+    </div>
+
+    <div class="tool-grid">
         <a class="tool-card" href="{{ url_for('uuid_generator') }}">
             <span class="icon-badge icon-purple">🆔</span>
             <h3>UUID Generator</h3>
@@ -222,30 +270,90 @@
             <h3>Text Compare</h3>
             <p>Compare two blocks of text and see the differences.</p>
         </a>
-        <a class="tool-card" href="{{ url_for('crop_image') }}">
-            <span class="icon-badge icon-red">✂️</span>
-            <h3>Crop Image</h3>
-            <p>Crop your image to exact position and size.</p>
+        <a class="tool-card" href="{{ url_for('color_picker') }}">
+            <span class="icon-badge icon-pink">🎨</span>
+            <h3>Color Picker</h3>
+            <p>Pick a color and get HEX, RGB, and HSL values.</p>
         </a>
-        <a class="tool-card" href="{{ url_for('resize_image') }}">
-            <span class="icon-badge icon-blue">📐</span>
-            <h3>Resize Image</h3>
-            <p>Resize your image to exact dimensions.</p>
+        <a class="tool-card" href="{{ url_for('random_number_generator') }}">
+            <span class="icon-badge icon-orange">🎲</span>
+            <h3>Random Number Generator</h3>
+            <p>Generate a random number within any range.</p>
         </a>
-        <a class="tool-card" href="{{ url_for('watermark_image') }}">
-            <span class="icon-badge icon-teal">💧</span>
-            <h3>Watermark Image</h3>
-            <p>Add a text watermark to your image.</p>
+        <a class="tool-card" href="{{ url_for('text_to_speech') }}">
+            <span class="icon-badge icon-purple">🔊</span>
+            <h3>Text to Speech</h3>
+            <p>Convert typed text into spoken audio instantly.</p>
         </a>
-        <a class="tool-card" href="{{ url_for('blur_image') }}">
-            <span class="icon-badge icon-purple">🌫️</span>
-            <h3>Blur Image</h3>
-            <p>Apply a smooth blur effect to your image.</p>
+        <a class="tool-card" href="{{ url_for('markdown_to_html') }}">
+            <span class="icon-badge icon-blue">📝</span>
+            <h3>Markdown to HTML</h3>
+            <p>Convert Markdown text to HTML instantly.</p>
         </a>
-        <a class="tool-card" href="{{ url_for('rotate_image') }}">
-            <span class="icon-badge icon-orange">🔄</span>
-            <h3>Rotate Image</h3>
-            <p>Rotate your image to any angle.</p>
+        <a class="tool-card" href="{{ url_for('csv_to_json') }}">
+            <span class="icon-badge icon-teal">📊</span>
+            <h3>CSV to JSON</h3>
+            <p>Convert CSV data into JSON format instantly.</p>
+        </a>
+        <a class="tool-card" href="{{ url_for('image_to_base64') }}">
+            <span class="icon-badge icon-purple">🖼️</span>
+            <h3>Image to Base64</h3>
+            <p>Convert an image to a Base64 string instantly.</p>
+        </a>
+        <a class="tool-card" href="{{ url_for('meta_tag_generator') }}">
+            <span class="icon-badge icon-pink">🏷️</span>
+            <h3>Meta Tag Generator</h3>
+            <p>Generate SEO meta tags for your website instantly.</p>
+        </a>
+        <a class="tool-card" href="{{ url_for('lorem_ipsum_generator') }}">
+            <span class="icon-badge icon-orange">📄</span>
+            <h3>Lorem Ipsum Generator</h3>
+            <p>Generate placeholder text instantly.</p>
+        </a>
+    </div>
+
+    <div style="margin:32px 0;">
+        <h2 style="font-size:1.3rem; font-weight:800; color:var(--text); margin-bottom:16px;">Popular Right Now</h2>
+        <div class="promo-grid">
+            <a href="{{ url_for('currency_converter') }}" class="promo-card">
+                <div class="promo-card-top">
+                    <h4>💱 Currency Converter</h4>
+                    <span class="promo-tag">LIVE RATES</span>
+                </div>
+                <p>Convert between currencies instantly using live exchange rates.</p>
+            </a>
+            <a href="{{ url_for('emi_calculator') }}" class="promo-card">
+                <div class="promo-card-top">
+                    <h4>🏦 EMI Calculator</h4>
+                    <span class="promo-tag">FINANCE</span>
+                </div>
+                <p>Calculate your monthly loan EMI, interest, and total payment.</p>
+            </a>
+            <a href="{{ url_for('barcode_generator') }}" class="promo-card">
+                <div class="promo-card-top">
+                    <h4>🔢 Barcode Generator</h4>
+                    <span class="promo-tag">INSTANT</span>
+                </div>
+                <p>Turn any text or number into a scannable barcode.</p>
+            </a>
+        </div>
+    </div>
+
+    <div class="tool-grid">
+        <a class="tool-card" href="{{ url_for('html_minifier') }}">
+            <span class="icon-badge icon-blue">🗜️</span>
+            <h3>HTML Minifier</h3>
+            <p>Minify HTML code to reduce file size instantly.</p>
+        </a>
+        <a class="tool-card" href="{{ url_for('css_minifier') }}">
+            <span class="icon-badge icon-teal">🗜️</span>
+            <h3>CSS Minifier</h3>
+            <p>Minify CSS code to reduce file size instantly.</p>
+        </a>
+        <a class="tool-card" href="{{ url_for('excel_to_pdf') }}">
+            <span class="icon-badge icon-red">📊</span>
+            <h3>Excel to PDF</h3>
+            <p>Convert Excel spreadsheets to PDF instantly.</p>
         </a>
     </div>
 </div>

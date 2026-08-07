@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Text to Speech - QuickToolz{% endblock %}
+{% block content %}
+<div class="container">
+<div class="tool-hero">
+    <h1>🔊 Text to Speech</h1>
+    <p class="subtitle">Type text and hear it spoken instantly — runs in your browser.</p>
+
+    <form onsubmit="return false;">
+        <textarea id="ttsInput" rows="6" placeholder="Type something to hear it..."></textarea>
+        <button onclick="speakText()">▶ Speak</button>
+        <button onclick="stopSpeak()" style="background:var(--card-bg-2); margin-top:8px;">■ Stop</button>
+    </form>
+    <p class="hint">Uses your browser's built-in voice — no upload, no server involved.</p>
+</div>
+</div>
+
+<script>
+function speakText() {
+    const text = document.getElementById("ttsInput").value;
+    if (!text.trim()) return;
+    window.speechSynthesis.cancel();
+    const utter = new SpeechSynthesisUtterance(text);
+    window.speechSynthesis.speak(utter);
+}
+function stopSpeak() {
+    window.speechSynthesis.cancel();
+}
+</script>
+{% endblock %}

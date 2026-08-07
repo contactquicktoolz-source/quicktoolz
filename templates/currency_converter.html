@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block title %}Currency Converter - QuickToolz{% endblock %}
+{% block content %}
+<div class="container">
+<div class="tool-hero">
+    <h1>💱 Currency Converter</h1>
+    <p class="subtitle" style="margin-bottom:8px;">Convert between currencies using live exchange rates.</p>
+
+    <form onsubmit="return false;" style="max-width:320px; margin:0 auto;">
+        <label>Amount</label>
+        <input type="number" id="amountInput" value="1">
+        <label>From</label>
+        <select id="fromCurrency">
+            <option value="USD">USD</option>
+            <option value="INR" selected>INR</option>
+            <option value="EUR">EUR</option>
+            <option value="GBP">GBP</option>
+            <option value="JPY">JPY</option>
+        </select>
+        <label>To</label>
+        <select id="toCurrency">
+            <option value="USD" selected>USD</option>
+            <option value="INR">INR</option>
+            <option value="EUR">EUR</option>
+            <option value="GBP">GBP</option>
+            <option value="JPY">JPY</option>
+        </select>
+        <button onclick="convertCurrency()" style="margin-top:4px;">Convert</button>
+    </form>
+    <div class="result-box" id="currResult" style="display:none; margin-top:10px;"></div>
+</div>
+</div>
+
+<script>
+async function convertCurrency() {
+    const amount = parseFloat(document.getElementById("amountInput").value);
+    const from = document.getElementById("fromCurrency").value;
+    const to = document.getElementById("toCurrency").value;
+    const box = document.getElementById("currResult");
+
+    if (!amount) { box.textContent = "Enter a valid amount."; box.style.display = "block"; return; }
+    box.textContent = "Loading...";
+    box.style.display = "block";
+
+    try {
+        const res = await fetch(`https://api.exchangerate-api.com/v4/latest/${from}`);
+        if (!res.ok) throw new Error("API request failed");
+        const data = await res.json();
+        const rate = data.rates[to];
+        if (!rate) throw new Error("Currency not found");
+        const result = amount * rate;
+        box.innerHTML = `${amount} ${from} = <strong>${result.toFixed(2)} ${to}</strong>`;
+    } catch (e) {
+        console.error("Currency conversion error:", e);
+        box.textContent = "Conversion failed. Please try again.";
+    }
+}
+</script>
+{% endblock %}

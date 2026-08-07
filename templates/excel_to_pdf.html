@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Excel to PDF - QuickToolz{% endblock %}
+{% block content %}
+<div class="container">
+<div class="tool-hero">
+    <h1>📊 Excel to PDF</h1>
+    <p class="subtitle">Convert Excel spreadsheets to PDF instantly.</p>
+
+    {% if error %}
+    <p style="color:#f87171; margin-bottom:16px;">{{ error }}</p>
+    {% endif %}
+
+    <form method="POST" enctype="multipart/form-data">
+        <div class="upload-box">
+            <label for="excel_file" class="upload-btn" style="cursor:pointer;">Choose Excel File</label>
+            <input type="file" id="excel_file" name="excel_file" accept=".xlsx,.xls" style="display:none;" onchange="showFileName(this)">
+            <p id="fileName" style="margin-top:12px; color:var(--muted);"></p>
+            <button type="submit" class="upload-btn" style="margin-top:20px;">Convert to PDF</button>
+        </div>
+    </form>
+</div>
+</div>
+
+<script>
+function showFileName(input) {
+    const fileNameEl = document.getElementById("fileName");
+    if (input.files.length > 0) {
+        fileNameEl.innerText = "Selected: " + input.files[0].name;
+    }
+}
+</script>
+{% endblock %}

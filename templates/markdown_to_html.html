@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Markdown to HTML - QuickToolz{% endblock %}
+{% block content %}
+<div class="container">
+<div class="tool-hero">
+    <h1>📝 Markdown to HTML</h1>
+    <p class="subtitle">Paste Markdown, see live HTML output instantly.</p>
+
+    <form onsubmit="return false;">
+        <textarea id="mdInput" rows="8" placeholder="# Hello World&#10;**bold** and *italic* text" oninput="convertMd()"></textarea>
+    </form>
+    <div class="result-box" id="mdResult" style="text-align:left; margin-top:14px; display:none;"></div>
+    <p class="hint">Renders instantly as you type — nothing leaves your browser.</p>
+</div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.2/marked.min.js"></script>
+<script>
+function convertMd() {
+    const input = document.getElementById("mdInput").value;
+    const resultBox = document.getElementById("mdResult");
+    if (!input.trim()) { resultBox.style.display = "none"; return; }
+    resultBox.innerHTML = marked.parse(input);
+    resultBox.style.display = "block";
+}
+</script>
+{% endblock %}

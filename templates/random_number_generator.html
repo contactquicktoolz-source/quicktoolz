@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Random Number Generator - QuickToolz{% endblock %}
+{% block content %}
+<div class="container">
+<div class="tool-hero">
+    <h1>🎲 Random Number Generator</h1>
+    <p class="subtitle">Generate a random number instantly.</p>
+
+    <form onsubmit="return false;" style="max-width:320px; margin:0 auto;">
+        <label>Min</label>
+        <input type="number" id="minVal" value="1">
+        <label>Max</label>
+        <input type="number" id="maxVal" value="100">
+        <button onclick="generateNumber()">Generate</button>
+    </form>
+    <div class="result-box" id="numResult" style="display:none; font-size:1.4rem; font-weight:800;"></div>
+</div>
+</div>
+
+<script>
+function generateNumber() {
+    const min = parseInt(document.getElementById("minVal").value);
+    const max = parseInt(document.getElementById("maxVal").value);
+    const box = document.getElementById("numResult");
+    if (isNaN(min) || isNaN(max) || min > max) {
+        box.textContent = "Invalid range";
+    } else {
+        box.textContent = Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+    box.style.display = "block";
+}
+</script>
+{% endblock %}

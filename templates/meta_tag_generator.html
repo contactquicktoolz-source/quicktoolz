@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Meta Tag Generator - QuickToolz{% endblock %}
+{% block content %}
+<div class="container">
+<div class="tool-hero">
+    <h1>🏷️ Meta Tag Generator</h1>
+    <p class="subtitle">Generate SEO meta tags for your website instantly.</p>
+
+    <form onsubmit="return false;" style="max-width:400px; margin:0 auto;">
+        <label>Page Title</label>
+        <input type="text" id="metaTitle" placeholder="My Awesome Page">
+        <label>Description</label>
+        <textarea id="metaDesc" rows="3" placeholder="A short description of your page"></textarea>
+        <label>Keywords (comma separated)</label>
+        <input type="text" id="metaKeywords" placeholder="tools, free, online">
+        <button onclick="generateMeta()">Generate Tags</button>
+    </form>
+    <div class="result-box" id="metaResult" style="display:none; text-align:left; white-space:pre-wrap;"></div>
+</div>
+</div>
+
+<script>
+function generateMeta() {
+    const title = document.getElementById("metaTitle").value || "Your Title";
+    const desc = document.getElementById("metaDesc").value || "Your description";
+    const keywords = document.getElementById("metaKeywords").value || "keyword1, keyword2";
+    const box = document.getElementById("metaResult");
+
+    box.textContent =
+`<title>${title}</title>
+<meta name="description" content="${desc}">
+<meta name="keywords" content="${keywords}">
+<meta property="og:title" content="${title}">
+<meta property="og:description" content="${desc}">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">`;
+    box.style.display = "block";
+}
+</script>
+{% endblock %}

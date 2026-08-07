@@ -6,22 +6,41 @@
     <h1>{ } JSON Formatter</h1>
     <p class="subtitle">Format and validate your JSON instantly.</p>
 
-    {% if error %}
-    <p style="color:#f87171; margin-bottom:16px;">{{ error }}</p>
-    {% endif %}
-
-    <form method="POST">
+    <form onsubmit="return false;">
         <label for="json_input">Paste your JSON</label>
-        <textarea name="json_input" id="json_input" rows="10" placeholder='{"name": "example", "value": 123}' style="font-family: monospace;">{{ input_text }}</textarea>
-        <button type="submit">Format JSON</button>
+        <textarea id="json_input" rows="8" placeholder='{"name": "example", "value": 123}' style="font-family: monospace;" oninput="formatJson()"></textarea>
     </form>
 
-    {% if result %}
-    <div class="result-box">
-        <p><strong>Formatted JSON:</strong></p>
-        <pre style="white-space: pre-wrap; word-break: break-word; font-family: monospace; font-size: 0.9rem;">{{ result }}</pre>
+    <div class="result-box" id="jsonResult" style="display:none; margin-top:10px;">
+        <p style="margin:0 0 6px;"><strong id="jsonResultLabel">Formatted JSON:</strong></p>
+        <pre id="jsonOutput" style="white-space: pre-wrap; word-break: break-word; font-family: monospace; font-size: 0.9rem; margin:0;"></pre>
     </div>
-    {% endif %}
 </div>
 </div>
+
+<script>
+function formatJson() {
+    const input = document.getElementById("json_input").value;
+    const resultBox = document.getElementById("jsonResult");
+    const output = document.getElementById("jsonOutput");
+    const label = document.getElementById("jsonResultLabel");
+
+    if (!input.trim()) {
+        resultBox.style.display = "none";
+        return;
+    }
+
+    try {
+        const parsed = JSON.parse(input);
+        output.textContent = JSON.stringify(parsed, null, 4);
+        label.textContent = "Formatted JSON:";
+        label.style.color = "var(--text)";
+    } catch (e) {
+        output.textContent = "Invalid JSON: " + e.message;
+        label.textContent = "Error:";
+        label.style.color = "#f87171";
+    }
+    resultBox.style.display = "block";
+}
+</script>
 {% endblock %}

@@ -11,14 +11,17 @@
     <p style="color:#f87171; margin-bottom:16px;">{{ error }}</p>
     {% endif %}
 
-    <form method="POST" enctype="multipart/form-data">
+    <form method="POST" enctype="multipart/form-data" id="mergeForm">
         <div class="upload-box">
-            <label for="pdfs" class="upload-btn" style="cursor:pointer; display:inline-block;">
-                Choose PDF Files
-            </label>
-            <input type="file" id="pdfs" name="pdfs" accept=".pdf" multiple style="display:none;" onchange="showFileName(this)">
-            <p id="fileName" style="margin-top:12px; color:var(--muted);"></p>
-            <p style="margin-top:8px; color:var(--muted); font-size:0.85rem;">Select 2 or more PDF files. They will be merged in the order selected.</p>
+            <div id="fileInputsContainer">
+                <input type="file" name="pdfs" accept=".pdf" class="pdf-single-input" style="display:block; margin-bottom:10px;" onchange="handleFileChange(this)">
+            </div>
+
+            <button type="button" class="upload-btn" id="addFileBtn" style="font-size:0.9rem; padding:10px 24px; margin-top:6px;" onclick="addFileInput()">
+                + Add Another File
+            </button>
+
+            <p style="margin-top:14px; color:var(--muted); font-size:0.85rem;">Select at least 2 PDF files. They will be merged in the order added.</p>
 
             <button type="submit" class="upload-btn" style="margin-top:20px; font-size:1.1rem; padding:16px 40px;">Merge PDFs</button>
         </div>
@@ -27,11 +30,28 @@
 </div>
 
 <script>
-function showFileName(input) {
-    const fileNameEl = document.getElementById("fileName");
-    if (input.files.length > 0) {
-        fileNameEl.innerText = input.files.length + " file(s) selected";
+function handleFileChange(input) {
+    if (input.files.length > 0 && input === getLastInput()) {
+        addFileInput();
     }
+}
+
+function getLastInput() {
+    const inputs = document.querySelectorAll(".pdf-single-input");
+    return inputs[inputs.length - 1];
+}
+
+function addFileInput() {
+    const container = document.getElementById("fileInputsContainer");
+    const newInput = document.createElement("input");
+    newInput.type = "file";
+    newInput.name = "pdfs";
+    newInput.accept = ".pdf";
+    newInput.className = "pdf-single-input";
+    newInput.style.display = "block";
+    newInput.style.marginBottom = "10px";
+    newInput.onchange = function () { handleFileChange(newInput); };
+    container.appendChild(newInput);
 }
 </script>
 {% endblock %}

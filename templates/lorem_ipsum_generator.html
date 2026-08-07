@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Lorem Ipsum Generator - QuickToolz{% endblock %}
+{% block content %}
+<div class="container">
+<div class="tool-hero">
+    <h1>📄 Lorem Ipsum Generator</h1>
+    <p class="subtitle">Generate placeholder text instantly.</p>
+
+    <form onsubmit="return false;" style="max-width:280px; margin:0 auto;">
+        <label>Number of Paragraphs</label>
+        <input type="number" id="paraCount" value="3" min="1" max="20">
+        <button onclick="generateLorem()">Generate</button>
+    </form>
+    <div class="result-box" id="loremResult" style="display:none; text-align:left;"></div>
+</div>
+</div>
+
+<script>
+const LOREM_WORDS = "lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat".split(" ");
+
+function generateParagraph() {
+    let words = [];
+    const count = 40 + Math.floor(Math.random() * 20);
+    for (let i = 0; i < count; i++) {
+        words.push(LOREM_WORDS[Math.floor(Math.random() * LOREM_WORDS.length)]);
+    }
+    let text = words.join(" ");
+    return text.charAt(0).toUpperCase() + text.slice(1) + ".";
+}
+
+function generateLorem() {
+    const n = parseInt(document.getElementById("paraCount").value) || 1;
+    const box = document.getElementById("loremResult");
+    let output = "";
+    for (let i = 0; i < n; i++) {
+        output += "<p>" + generateParagraph() + "</p>";
+    }
+    box.innerHTML = output;
+    box.style.display = "block";
+}
+</script>
+{% endblock %}

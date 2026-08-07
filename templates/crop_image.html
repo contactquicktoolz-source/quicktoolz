@@ -5,10 +5,10 @@
 <div class="tool-hero">
     <h1>✂️ Crop Image</h1>
     <p class="subtitle">Crop your image by entering exact position and size.</p>
-    <p style="color:var(--muted); font-size:0.9rem;">Max file size: 32 MB</p>
+    <p style="color:var(--muted); font-size:0.85rem; margin-top:-6px;">Max file size: 32 MB</p>
 
     {% if error %}
-    <p style="color:#f87171; margin-bottom:16px;">{{ error }}</p>
+    <p style="color:#f87171; margin-bottom:8px;">{{ error }}</p>
     {% endif %}
 
     <form method="POST" enctype="multipart/form-data">
@@ -17,26 +17,31 @@
                 Choose Image
             </label>
             <input type="file" id="image" name="image" accept=".jpg,.jpeg,.png,.webp" style="display:none;" onchange="showFileName(this)">
-            <p id="fileName" style="margin-top:12px; color:var(--muted);"></p>
+            <p id="fileName" style="margin-top:6px; color:var(--muted); font-size:0.85rem;"></p>
 
-            <div class="quality-row" style="margin-top:16px;">
-                <label>X Position (from left)</label>
-                <input type="number" name="x" value="0" min="0">
-            </div>
-            <div class="quality-row">
-                <label>Y Position (from top)</label>
-                <input type="number" name="y" value="0" min="0">
-            </div>
-            <div class="quality-row">
-                <label>Crop Width</label>
-                <input type="number" name="width" value="300" min="1" required>
-            </div>
-            <div class="quality-row">
-                <label>Crop Height</label>
-                <input type="number" name="height" value="300" min="1" required>
+            <div style="display:flex; gap:12px; margin-top:8px; width:100%; max-width:320px;">
+                <div class="quality-row" style="flex:1;">
+                    <label>X Position</label>
+                    <input type="number" name="x" value="0" min="0">
+                </div>
+                <div class="quality-row" style="flex:1;">
+                    <label>Y Position</label>
+                    <input type="number" name="y" value="0" min="0">
+                </div>
             </div>
 
-            <button type="submit" class="upload-btn" style="margin-top:20px; font-size:1.1rem; padding:16px 40px;">Crop Image</button>
+            <div style="display:flex; gap:12px; margin-top:6px; width:100%; max-width:320px;">
+                <div class="quality-row" style="flex:1;">
+                    <label>Crop Width</label>
+                    <input type="number" name="width" value="300" min="1" required>
+                </div>
+                <div class="quality-row" style="flex:1;">
+                    <label>Crop Height</label>
+                    <input type="number" name="height" value="300" min="1" required>
+                </div>
+            </div>
+
+            <button type="submit" class="upload-btn" style="margin-top:12px; font-size:1rem; padding:12px 32px;">Crop Image</button>
         </div>
     </form>
 </div>

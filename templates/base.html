@@ -40,14 +40,12 @@
                         <a href="{{ url_for('protect_pdf') }}">🔒 Protect PDF</a>
                     </div>
                     <div class="mega-col">
-                        <h4>Convert to PDF</h4>
+                        <h4>File Conversion</h4>
                         <a href="{{ url_for('word_to_pdf') }}">📄 Word to PDF</a>
+                        <a href="{{ url_for('pdf_to_word') }}">📝 PDF to Word</a>
+                        <a href="{{ url_for('excel_to_pdf') }}">📊 Excel to PDF</a>
                         <a href="{{ url_for('jpg_to_pdf') }}">📄 JPG to PDF</a>
                         <a href="{{ url_for('png_to_pdf') }}">📄 PNG to PDF</a>
-                    </div>
-                    <div class="mega-col">
-                        <h4>Convert from PDF</h4>
-                        <a href="{{ url_for('pdf_to_word') }}">📝 PDF to Word</a>
                         <a href="{{ url_for('pdf_to_jpg') }}">🖼️ PDF to JPG</a>
                         <a href="{{ url_for('pdf_to_png') }}">🖼️ PDF to PNG</a>
                     </div>
@@ -55,26 +53,60 @@
                         <h4>Image Tools</h4>
                         <a href="{{ url_for('image_compressor') }}">🖼️ Image Compressor</a>
                         <a href="{{ url_for('background_remover') }}">✂️ Background Remover</a>
+                        <a href="{{ url_for('crop_image') }}">✂️ Crop Image</a>
+                        <a href="{{ url_for('resize_image') }}">📐 Resize Image</a>
+                        <a href="{{ url_for('rotate_image') }}">🔄 Rotate Image</a>
+                        <a href="{{ url_for('watermark_image') }}">💧 Watermark Image</a>
+                        <a href="{{ url_for('blur_image') }}">🌫️ Blur Image</a>
+                    </div>
+                    <div class="mega-col">
+                        <h4>Image Format</h4>
                         <a href="{{ url_for('jpg_to_png') }}">🖼️ JPG to PNG</a>
                         <a href="{{ url_for('png_to_jpg') }}">🖼️ PNG to JPG</a>
                         <a href="{{ url_for('webp_to_jpg') }}">🖼️ WEBP to JPG</a>
+                        <a href="{{ url_for('image_to_base64') }}">🔤 Image to Base64</a>
                     </div>
                     <div class="mega-col">
-                        <h4>Utilities</h4>
-                        <a href="{{ url_for('word_counter') }}">📝 Word Counter</a>
-                        <a href="{{ url_for('qr_generator') }}">📱 QR Generator</a>
-                        <a href="{{ url_for('unit_converter') }}">📏 Unit Converter</a>
-                        <a href="{{ url_for('temperature_converter') }}">🌡️ Temp Converter</a>
+                        <h4>Calculators</h4>
                         <a href="{{ url_for('percentage_calculator') }}">🧮 Percentage Calculator</a>
-                        <a href="{{ url_for('password_generator') }}">🔒 Password Generator</a>
-                        <a href="{{ url_for('audio_converter') }}">🎵 Audio Converter</a>
+                        <a href="{{ url_for('unit_converter') }}">📏 Unit Converter</a>
+                        <a href="{{ url_for('temperature_converter') }}">🌡️ Temperature Converter</a>
+                        <a href="{{ url_for('currency_converter') }}">💱 Currency Converter</a>
+                        <a href="{{ url_for('emi_calculator') }}">🏦 EMI Calculator</a>
+                        <a href="{{ url_for('age_calculator') }}">🎂 Age Calculator</a>
                     </div>
                     <div class="mega-col">
-                        <h4>Dev Tools</h4>
+                        <h4>Generators</h4>
+                        <a href="{{ url_for('qr_generator') }}">📱 QR Code Generator</a>
+                        <a href="{{ url_for('password_generator') }}">🔒 Password Generator</a>
+                        <a href="{{ url_for('barcode_generator') }}">🔢 Barcode Generator</a>
+                        <a href="{{ url_for('uuid_generator') }}">🆔 UUID Generator</a>
+                        <a href="{{ url_for('random_number_generator') }}">🎲 Random Number Generator</a>
+                        <a href="{{ url_for('lorem_ipsum_generator') }}">📄 Lorem Ipsum Generator</a>
+                        <a href="{{ url_for('color_picker') }}">🎨 Color Picker</a>
+                    </div>
+                    <div class="mega-col">
+                        <h4>Text Tools</h4>
+                        <a href="{{ url_for('word_counter') }}">📝 Word Counter</a>
+                        <a href="{{ url_for('case_converter') }}">🔠 Case Converter</a>
+                        <a href="{{ url_for('remove_duplicate_lines') }}">📋 Remove Duplicate Lines</a>
+                        <a href="{{ url_for('text_compare') }}">🔍 Text Compare</a>
+                        <a href="{{ url_for('text_to_speech') }}">🔊 Text to Speech</a>
+                        <a href="{{ url_for('markdown_to_html') }}">📝 Markdown to HTML</a>
+                    </div>
+                    <div class="mega-col">
+                        <h4>Developer Tools</h4>
                         <a href="{{ url_for('json_formatter') }}">{ } JSON Formatter</a>
                         <a href="{{ url_for('base64_tool') }}">🔤 Base64 Encode/Decode</a>
                         <a href="{{ url_for('url_encoder') }}">🔗 URL Encoder</a>
-                        <a href="{{ url_for('uuid_generator') }}">🆔 UUID Generator</a>
+                        <a href="{{ url_for('csv_to_json') }}">📊 CSV to JSON</a>
+                        <a href="{{ url_for('html_minifier') }}">🗜️ HTML Minifier</a>
+                        <a href="{{ url_for('css_minifier') }}">🗜️ CSS Minifier</a>
+                        <a href="{{ url_for('meta_tag_generator') }}">🏷️ Meta Tag Generator</a>
+                    </div>
+                    <div class="mega-col">
+                        <h4>Audio</h4>
+                        <a href="{{ url_for('audio_converter') }}">🎵 Audio Converter</a>
                     </div>
                 </div>
             </div>
@@ -139,7 +171,22 @@
         {name: "Resize Image", url: "{{ url_for('resize_image') }}"},
         {name: "Watermark Image", url: "{{ url_for('watermark_image') }}"},
         {name: "Blur Image", url: "{{ url_for('blur_image') }}"},
-        {name: "Rotate Image", url: "{{ url_for('rotate_image') }}"}
+        {name: "Rotate Image", url: "{{ url_for('rotate_image') }}"},
+        {name: "Markdown to HTML", url: "{{ url_for('markdown_to_html') }}"},
+        {name: "CSV to JSON", url: "{{ url_for('csv_to_json') }}"},
+        {name: "Color Picker", url: "{{ url_for('color_picker') }}"},
+        {name: "Text to Speech", url: "{{ url_for('text_to_speech') }}"},
+        {name: "Random Number Generator", url: "{{ url_for('random_number_generator') }}"},
+        {name: "Age Calculator", url: "{{ url_for('age_calculator') }}"},
+        {name: "EMI Calculator", url: "{{ url_for('emi_calculator') }}"},
+        {name: "Currency Converter", url: "{{ url_for('currency_converter') }}"},
+        {name: "Image to Base64", url: "{{ url_for('image_to_base64') }}"},
+        {name: "Meta Tag Generator", url: "{{ url_for('meta_tag_generator') }}"},
+        {name: "Lorem Ipsum Generator", url: "{{ url_for('lorem_ipsum_generator') }}"},
+        {name: "HTML Minifier", url: "{{ url_for('html_minifier') }}"},
+        {name: "CSS Minifier", url: "{{ url_for('css_minifier') }}"},
+        {name: "Excel to PDF", url: "{{ url_for('excel_to_pdf') }}"},
+        {name: "Barcode Generator", url: "{{ url_for('barcode_generator') }}"}
     ];
 
     function toggleNavSearch() {

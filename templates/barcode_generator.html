@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Barcode Generator - QuickToolz{% endblock %}
+{% block content %}
+<div class="container">
+<div class="tool-hero">
+    <h1>🔢 Barcode Generator</h1>
+    <p class="subtitle">Turn any text or number into a barcode instantly.</p>
+
+    <form onsubmit="return false;" style="max-width:320px; margin:0 auto;">
+        <label>Text / Number</label>
+        <input type="text" id="barcodeInput" placeholder="e.g. 123456789012" oninput="generateBarcode()">
+    </form>
+    <div style="margin-top:16px; background:#fff; padding:16px; border-radius:12px; display:inline-block;">
+        <svg id="barcodeSvg"></svg>
+    </div>
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
+<script>
+function generateBarcode() {
+    const value = document.getElementById("barcodeInput").value;
+    if (!value.trim()) { document.getElementById("barcodeSvg").innerHTML = ""; return; }
+    try {
+        JsBarcode("#barcodeSvg", value, { format: "CODE128", width: 2, height: 80 });
+    } catch (e) {
+        console.error("Barcode error:", e);
+        document.getElementById("barcodeSvg").innerHTML = "";
+    }
+}
+document.addEventListener("DOMContentLoaded", function () {
+    const input = document.getElementById("barcodeInput");
+    if (input.value) generateBarcode();
+});
+</script>
+{% endblock %}

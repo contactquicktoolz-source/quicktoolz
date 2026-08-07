@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}Age Calculator - QuickToolz{% endblock %}
+{% block content %}
+<div class="container">
+<div class="tool-hero">
+    <h1>🎂 Age Calculator</h1>
+    <p class="subtitle">Find your exact age in years, months, and days.</p>
+
+    <form onsubmit="return false;" style="max-width:320px; margin:0 auto;">
+        <label>Date of Birth</label>
+        <input type="date" id="dobInput">
+        <button onclick="calcAge()">Calculate Age</button>
+    </form>
+    <div class="result-box" id="ageResult" style="display:none;"></div>
+</div>
+</div>
+
+<script>
+function calcAge() {
+    const dob = document.getElementById("dobInput").value;
+    const box = document.getElementById("ageResult");
+    if (!dob) { box.style.display = "none"; return; }
+
+    const birth = new Date(dob);
+    const today = new Date();
+    if (birth > today) { box.textContent = "Date of birth cannot be in the future."; box.style.display = "block"; return; }
+
+    let years = today.getFullYear() - birth.getFullYear();
+    let months = today.getMonth() - birth.getMonth();
+    let days = today.getDate() - birth.getDate();
+
+    if (days < 0) {
+        months--;
+        const prevMonth = new Date(today.getFullYear(), today.getMonth(), 0);
+        days += prevMonth.getDate();
+    }
+    if (months < 0) { years--; months += 12; }
+
+    box.textContent = `${years} years, ${months} months, ${days} days`;
+    box.style.display = "block";
+}
+</script>
+{% endblock %}

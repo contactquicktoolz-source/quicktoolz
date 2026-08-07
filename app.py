@@ -264,11 +264,18 @@ def word_to_pdf():
         output_path = os.path.join(temp_dir, output_filename)
 
         try:
-            subprocess.run(
-                ["libreoffice", "--headless", "--convert-to", "pdf",
-                 "--outdir", temp_dir, input_path],
-                check=True, timeout=60
-            )
+            try:
+                subprocess.run(
+                    ["libreoffice", "--headless", "--convert-to", "pdf",
+                     "--outdir", temp_dir, input_path],
+                    check=True, timeout=60
+                )
+            except (FileNotFoundError, subprocess.CalledProcessError):
+                subprocess.run(
+                    ["soffice", "--headless", "--convert-to", "pdf",
+                     "--outdir", temp_dir, input_path],
+                    check=True, timeout=60
+                )
         except Exception:
             return render_template("word_to_pdf.html", error="Conversion failed. Please try again.")
 
@@ -1009,6 +1016,113 @@ def rotate_image():
         except Exception:
             return render_template("rotate_image.html", error="Rotation failed. Please try again.")
     return render_template("rotate_image.html")
+
+# ---------- 37. Markdown to HTML ----------
+@app.route("/markdown-to-html")
+def markdown_to_html():
+    return render_template("markdown_to_html.html")
+
+# ---------- 38. CSV to JSON ----------
+@app.route("/csv-to-json")
+def csv_to_json():
+    return render_template("csv_to_json.html")
+
+# ---------- 39. Color Picker ----------
+@app.route("/color-picker")
+def color_picker():
+    return render_template("color_picker.html")
+
+# ---------- 40. Text to Speech ----------
+@app.route("/text-to-speech")
+def text_to_speech():
+    return render_template("text_to_speech.html")
+
+# ---------- 41. Random Number Generator ----------
+@app.route("/random-number-generator")
+def random_number_generator():
+    return render_template("random_number_generator.html")
+
+# ---------- 42. Age Calculator ----------
+@app.route("/age-calculator")
+def age_calculator():
+    return render_template("age_calculator.html")
+
+# ---------- 43. EMI Calculator ----------
+@app.route("/emi-calculator")
+def emi_calculator():
+    return render_template("emi_calculator.html")
+
+# ---------- 44. Currency Converter ----------
+@app.route("/currency-converter")
+def currency_converter():
+    return render_template("currency_converter.html")
+
+# ---------- 45. Image to Base64 ----------
+@app.route("/image-to-base64")
+def image_to_base64():
+    return render_template("image_to_base64.html")
+
+# ---------- 46. Meta Tag Generator ----------
+@app.route("/meta-tag-generator")
+def meta_tag_generator():
+    return render_template("meta_tag_generator.html")
+
+# ---------- 47. Lorem Ipsum Generator ----------
+@app.route("/lorem-ipsum-generator")
+def lorem_ipsum_generator():
+    return render_template("lorem_ipsum_generator.html")
+
+# ---------- 48. HTML Minifier ----------
+@app.route("/html-minifier")
+def html_minifier():
+    return render_template("html_minifier.html")
+
+# ---------- 49. CSS Minifier ----------
+@app.route("/css-minifier")
+def css_minifier():
+    return render_template("css_minifier.html")
+
+# ---------- 50. Excel to PDF ----------
+@app.route("/excel-to-pdf", methods=["GET", "POST"])
+def excel_to_pdf():
+    if request.method == "POST":
+        file = request.files.get("excel_file")
+        if not file or file.filename == "":
+            return render_template("excel_to_pdf.html", error="Please select an Excel file.")
+        if not file.filename.lower().endswith((".xlsx", ".xls")):
+            return render_template("excel_to_pdf.html", error="Please upload a .xlsx or .xls file.")
+
+        temp_dir = tempfile.mkdtemp()
+        input_path = os.path.join(temp_dir, file.filename)
+        file.save(input_path)
+
+        output_filename = os.path.splitext(file.filename)[0] + ".pdf"
+        output_path = os.path.join(temp_dir, output_filename)
+
+        try:
+            try:
+                subprocess.run(
+                    ["libreoffice", "--headless", "--convert-to", "pdf",
+                     "--outdir", temp_dir, input_path],
+                    check=True, timeout=60
+                )
+            except (FileNotFoundError, subprocess.CalledProcessError):
+                subprocess.run(
+                    ["soffice", "--headless", "--convert-to", "pdf",
+                     "--outdir", temp_dir, input_path],
+                    check=True, timeout=60
+                )
+        except Exception:
+            return render_template("excel_to_pdf.html", error="Conversion failed. Please try again.")
+
+        return send_file(output_path, as_attachment=True, download_name=output_filename)
+
+    return render_template("excel_to_pdf.html")
+
+# ---------- 51. Barcode Generator ----------
+@app.route("/barcode-generator")
+def barcode_generator():
+    return render_template("barcode_generator.html")
 
 # ---------- Privacy Policy ----------
 @app.route("/privacy-policy")

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}HTML Minifier - QuickToolz{% endblock %}
+{% block content %}
+<div class="container">
+<div class="tool-hero">
+    <h1>🗜️ HTML Minifier</h1>
+    <p class="subtitle">Paste HTML, get minified output instantly.</p>
+
+    <form onsubmit="return false;">
+        <textarea id="htmlInput" rows="8" placeholder="Paste your HTML here..." oninput="minifyHtml()"></textarea>
+    </form>
+    <div class="result-box" id="htmlResult" style="display:none; text-align:left; word-break:break-all;"></div>
+</div>
+</div>
+
+<script>
+function minifyHtml() {
+    const input = document.getElementById("htmlInput").value;
+    const box = document.getElementById("htmlResult");
+    if (!input.trim()) { box.style.display = "none"; return; }
+
+    const minified = input
+        .replace(/<!--[\s\S]*?-->/g, "")
+        .replace(/\n\s*/g, "")
+        .replace(/>\s+</g, "><")
+        .trim();
+
+    box.textContent = minified;
+    box.style.display = "block";
+}
+</script>
+{% endblock %}
