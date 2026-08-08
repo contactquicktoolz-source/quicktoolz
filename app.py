@@ -1123,7 +1123,10 @@ def excel_to_pdf():
 @app.route("/barcode-generator")
 def barcode_generator():
     return render_template("barcode_generator.html")
-
+# ---------- Ads.txt ----------
+@app.route("/ads.txt")
+def ads_txt():
+    return "google.com, pub-7303450474220002, DIRECT, f08c47fec0942fa0", 200, {"Content-Type": "text/plain"}
 # ---------- Privacy Policy ----------
 @app.route("/privacy-policy")
 def privacy_policy():
