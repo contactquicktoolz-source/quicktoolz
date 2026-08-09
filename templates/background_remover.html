@@ -74,7 +74,6 @@ document.getElementById("bgForm").addEventListener("submit", function (e) {
         return;
     }
 
-    // Show loading, hide upload box
     document.getElementById("uploadBox").style.display = "none";
     document.getElementById("doneBox").style.display = "none";
     document.getElementById("loadingBox").style.display = "block";
@@ -102,24 +101,28 @@ document.getElementById("bgForm").addEventListener("submit", function (e) {
             return response.blob().then(blob => {
                 const url = window.URL.createObjectURL(blob);
 
-                // Show done message
                 document.getElementById("loadingBox").style.display = "none";
                 document.getElementById("finalSeconds").innerText = seconds;
                 document.getElementById("doneBox").style.display = "block";
 
                 const link = document.getElementById("downloadLink");
                 link.href = url;
+                link.setAttribute("download", "no_background.png");
+                link.setAttribute("target", "_blank");
+                link.innerText = "Tap to Download Image";
 
-                // Auto-trigger download
-                const a = document.createElement("a");
-                a.href = url;
-                a.download = "no_background.png";
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
+                // Only auto-trigger on non-iOS devices (desktop, Android)
+                const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+                if (!isIOS) {
+                    const a = document.createElement("a");
+                    a.href = url;
+                    a.download = "no_background.png";
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                }
             });
         } else {
-            // Error came back as HTML
             document.getElementById("loadingBox").style.display = "none";
             document.getElementById("uploadBox").style.display = "block";
             errorMsg.innerText = "Background removal failed. Please try again.";
