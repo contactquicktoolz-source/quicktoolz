@@ -777,4 +777,40 @@ footer {
         width: 200px;
         left: -30px;
     }
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px 16px;
+    }
+
+    .logo {
+        margin-bottom: 8px;
+    }
+
+    .navbar nav {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 10px 16px;
+        width: 100%;
+    }
+
+    .navbar nav a {
+        margin-left: 0;
+        font-size: 0.8rem;
+    }
+
+    .nav-search {
+        margin-left: 0;
+        order: -1;
+        width: 100%;
+    }
+
+    .back-to-tools-btn {
+        top: auto;
+        position: static;
+        display: inline-flex;
+        margin: 10px 0 0;
+        box-shadow: none;
+    }
 }
