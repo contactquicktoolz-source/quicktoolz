@@ -298,7 +298,7 @@ def pdf_to_word():
         input_path = os.path.join(temp_dir, file.filename)
         file.save(input_path)
 
-        output_filename = os.path.splitext(file.filename)[0] + ".docx"
+        output_filename = os.path.splitext(file.filename)[0] + "_" + os.urandom(4).hex() + ".docx"
         output_path = os.path.join(temp_dir, output_filename)
 
         try:
@@ -311,7 +311,6 @@ def pdf_to_word():
         return send_file(output_path, as_attachment=True, download_name=output_filename)
 
     return render_template("pdf_to_word.html")
-
 
 # ---------- 10. PDF to JPG ----------
 @app.route("/pdf-to-jpg", methods=["GET", "POST"])
