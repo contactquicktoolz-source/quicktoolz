@@ -446,8 +446,9 @@ def background_remover():
             output_bytes = remove(input_bytes)
             buf = io.BytesIO(output_bytes)
             buf.seek(0)
+            unique_name = "no_background_" + os.urandom(4).hex() + ".png"
             return send_file(buf, mimetype="image/png",
-                              as_attachment=True, download_name="no_background.png")
+                              as_attachment=True, download_name=unique_name)
         except Exception:
             return {"error": "Background removal failed. Please try again."}, 500
     return render_template("background_remover.html")

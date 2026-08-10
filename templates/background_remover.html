@@ -100,6 +100,7 @@ document.getElementById("bgForm").addEventListener("submit", function (e) {
         if (contentType.includes("image/png")) {
             return response.blob().then(blob => {
                 const url = window.URL.createObjectURL(blob);
+                const uniqueFileName = "no_background_" + Date.now() + ".png";
 
                 document.getElementById("loadingBox").style.display = "none";
                 document.getElementById("finalSeconds").innerText = seconds;
@@ -107,7 +108,7 @@ document.getElementById("bgForm").addEventListener("submit", function (e) {
 
                 const link = document.getElementById("downloadLink");
                 link.href = url;
-                link.setAttribute("download", "no_background.png");
+                link.setAttribute("download", uniqueFileName);
                 link.setAttribute("target", "_blank");
                 link.innerText = "Tap to Download Image";
 
@@ -116,7 +117,7 @@ document.getElementById("bgForm").addEventListener("submit", function (e) {
                 if (!isIOS) {
                     const a = document.createElement("a");
                     a.href = url;
-                    a.download = "no_background.png";
+                    a.download = uniqueFileName;
                     document.body.appendChild(a);
                     a.click();
                     document.body.removeChild(a);
