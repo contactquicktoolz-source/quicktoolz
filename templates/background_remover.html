@@ -109,7 +109,6 @@ document.getElementById("bgForm").addEventListener("submit", function (e) {
                 const link = document.getElementById("downloadLink");
                 link.href = url;
                 link.setAttribute("download", uniqueFileName);
-                link.setAttribute("target", "_blank");
                 link.innerText = "Tap to Download Image";
 
                 // Only auto-trigger on non-iOS devices (desktop, Android)

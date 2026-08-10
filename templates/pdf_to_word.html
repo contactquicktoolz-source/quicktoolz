@@ -109,7 +109,7 @@ document.getElementById("pdfForm").addEventListener("submit", function (e) {
                 const link = document.getElementById("downloadLink");
                 link.href = url;
                 link.setAttribute("download", uniqueFileName);
-                link.setAttribute("target", "_blank");
+
 
                 const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
                 if (!isIOS) {
