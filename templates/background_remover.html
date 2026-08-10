@@ -7,10 +7,12 @@
     <p class="subtitle">Remove image backgrounds automatically using AI.</p>
     <p style="color:var(--muted); font-size:0.9rem;">Max file size: 32 MB</p>
 
-    <p id="errorMsg" style="color:#f87171; margin-bottom:16px; display:none;"></p>
+    {% if error %}
+    <p style="color:#f87171; margin-bottom:16px;">{{ error }}</p>
+    {% endif %}
 
-    <form id="bgForm">
-        <div class="upload-box" id="uploadBox">
+    <form method="POST" enctype="multipart/form-data" id="bgForm">
+        <div class="upload-box">
             <label for="image" class="upload-btn" style="cursor:pointer; display:inline-block;">
                 Choose Image
             </label>
@@ -19,39 +21,14 @@
             <p style="margin-top:8px; color:var(--muted); font-size:0.85rem;">Processing may take a few seconds.</p>
 
             <button type="submit" class="upload-btn" id="submitBtn" style="margin-top:20px; font-size:1.1rem; padding:16px 40px;">Remove Background</button>
-        </div>
 
-        <div id="loadingBox" style="display:none; margin-top:24px; text-align:center;">
-            <div class="spinner"></div>
-            <p style="margin-top:16px; color:var(--text); font-size:1.05rem;">
-                Removing background... <span id="secondsCount">0</span>s
+            <p id="convertingMsg" style="display:none; margin-top:16px; color:var(--text); font-size:1.05rem;">
+                ⏳ Removing background... please wait
             </p>
-        </div>
-
-        <div id="doneBox" style="display:none; margin-top:24px; text-align:center;">
-            <p style="color:#4ade80; font-size:1.1rem;">✅ Background removed in <span id="finalSeconds">0</span>s</p>
-            <p style="color:var(--muted); font-size:0.9rem; margin-top:6px;">Thanks For Waiting.</p>
-            <a id="downloadLink" class="upload-btn" style="margin-top:16px; display:inline-block; font-size:1rem; padding:12px 30px;" download="no_background.png">Download Again</a>
         </div>
     </form>
 </div>
 </div>
-
-<style>
-.spinner {
-    width: 48px;
-    height: 48px;
-    border: 4px solid var(--border);
-    border-top: 4px solid var(--primary);
-    border-radius: 50%;
-    animation: spin 0.8s linear infinite;
-    margin: 0 auto;
-}
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-</style>
 
 <script>
 function showFileName(input) {
@@ -61,81 +38,10 @@ function showFileName(input) {
     }
 }
 
-document.getElementById("bgForm").addEventListener("submit", function (e) {
-    e.preventDefault();
-
-    const fileInput = document.getElementById("image");
-    const errorMsg = document.getElementById("errorMsg");
-    errorMsg.style.display = "none";
-
-    if (fileInput.files.length === 0) {
-        errorMsg.innerText = "Please select an image.";
-        errorMsg.style.display = "block";
-        return;
-    }
-
-    document.getElementById("uploadBox").style.display = "none";
-    document.getElementById("doneBox").style.display = "none";
-    document.getElementById("loadingBox").style.display = "block";
-
-    let seconds = 0;
-    const secondsEl = document.getElementById("secondsCount");
-    secondsEl.innerText = "0";
-    const timer = setInterval(function () {
-        seconds++;
-        secondsEl.innerText = seconds;
-    }, 1000);
-
-    const formData = new FormData();
-    formData.append("image", fileInput.files[0]);
-
-    fetch("{{ url_for('background_remover') }}", {
-        method: "POST",
-        body: formData
-    })
-    .then(response => {
-        clearInterval(timer);
-        const contentType = response.headers.get("content-type") || "";
-
-        if (contentType.includes("image/png")) {
-            return response.blob().then(blob => {
-                const url = window.URL.createObjectURL(blob);
-                const uniqueFileName = "no_background_" + Date.now() + ".png";
-
-                document.getElementById("loadingBox").style.display = "none";
-                document.getElementById("finalSeconds").innerText = seconds;
-                document.getElementById("doneBox").style.display = "block";
-
-                const link = document.getElementById("downloadLink");
-                link.href = url;
-                link.setAttribute("download", uniqueFileName);
-                link.innerText = "Tap to Download Image";
-
-                // Only auto-trigger on non-iOS devices (desktop, Android)
-                const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-                if (!isIOS) {
-                    const a = document.createElement("a");
-                    a.href = url;
-                    a.download = uniqueFileName;
-                    document.body.appendChild(a);
-                    a.click();
-                    document.body.removeChild(a);
-                }
-            });
-        } else {
-            document.getElementById("loadingBox").style.display = "none";
-            document.getElementById("uploadBox").style.display = "block";
-            errorMsg.innerText = "Background removal failed. Please try again.";
-            errorMsg.style.display = "block";
-        }
-    })
-    .catch(() => {
-        clearInterval(timer);
-        document.getElementById("loadingBox").style.display = "none";
-        document.getElementById("uploadBox").style.display = "block";
-        errorMsg.innerText = "Something went wrong. Please try again.";
-        errorMsg.style.display = "block";
-    });
+document.getElementById("bgForm").addEventListener("submit", function () {
+    document.getElementById("submitBtn").disabled = true;
+    document.getElementById("submitBtn").innerText = "Removing...";
+    document.getElementById("convertingMsg").style.display = "block";
 });
 </script>
 {% endblock %}

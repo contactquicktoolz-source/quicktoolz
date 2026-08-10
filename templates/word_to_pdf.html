@@ -11,7 +11,7 @@
     <p style="color:#f87171; margin-bottom:16px;">{{ error }}</p>
     {% endif %}
 
-    <form method="POST" enctype="multipart/form-data">
+    <form method="POST" enctype="multipart/form-data" id="wordForm">
         <div class="upload-box">
             <label for="docx_file" class="upload-btn" style="cursor:pointer; display:inline-block;">
                 Choose Word File
@@ -19,7 +19,11 @@
             <input type="file" id="docx_file" name="docx_file" accept=".doc,.docx" style="display:none;" onchange="showFileName(this)">
             <p id="fileName" style="margin-top:12px; color:var(--muted);"></p>
 
-            <button type="submit" class="upload-btn" style="margin-top:20px; font-size:1.1rem; padding:16px 40px;">Convert to PDF</button>
+            <button type="submit" class="upload-btn" id="submitBtn" style="margin-top:20px; font-size:1.1rem; padding:16px 40px;">Convert to PDF</button>
+
+            <p id="convertingMsg" style="display:none; margin-top:16px; color:var(--text); font-size:1.05rem;">
+                ⏳ Converting... please wait
+            </p>
         </div>
     </form>
 </div>
@@ -32,5 +36,11 @@ function showFileName(input) {
         fileNameEl.innerText = "Selected: " + input.files[0].name;
     }
 }
+
+document.getElementById("wordForm").addEventListener("submit", function () {
+    document.getElementById("submitBtn").disabled = true;
+    document.getElementById("submitBtn").innerText = "Converting...";
+    document.getElementById("convertingMsg").style.display = "block";
+});
 </script>
 {% endblock %}

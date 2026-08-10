@@ -438,7 +438,7 @@ def background_remover():
     if request.method == "POST":
         file = request.files.get("image")
         if not file or file.filename == "":
-            return {"error": "Please select an image."}, 400
+            return render_template("background_remover.html", error="Please select an image.")
         try:
             input_bytes = file.read()
             output_bytes = remove(input_bytes)
@@ -448,7 +448,7 @@ def background_remover():
             return send_file(buf, mimetype="image/png",
                               as_attachment=True, download_name=unique_name)
         except Exception:
-            return {"error": "Background removal failed. Please try again."}, 500
+            return render_template("background_remover.html", error="Background removal failed. Please try again.")
     return render_template("background_remover.html")
 
 # ---------- 16. Audio Converter ----------
