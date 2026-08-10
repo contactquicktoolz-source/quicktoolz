@@ -99,20 +99,27 @@ document.getElementById("pdfForm").addEventListener("submit", function (e) {
 
         if (contentType.includes("wordprocessingml") || contentType.includes("msword")) {
             return response.blob().then(blob => {
-                const url = window.URL.createObjectURL(blob);
                 const uniqueFileName = "converted_" + Date.now() + ".docx";
+                const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
 
                 document.getElementById("loadingBox").style.display = "none";
                 document.getElementById("finalSeconds").innerText = seconds;
                 document.getElementById("doneBox").style.display = "block";
 
                 const link = document.getElementById("downloadLink");
-                link.href = url;
-                link.setAttribute("download", uniqueFileName);
 
+                if (isIOS) {
+                    const reader = new FileReader();
+                    reader.onloadend = function () {
+                        link.href = reader.result;
+                        link.setAttribute("download", uniqueFileName);
+                    };
+                    reader.readAsDataURL(blob);
+                } else {
+                    const url = window.URL.createObjectURL(blob);
+                    link.href = url;
+                    link.setAttribute("download", uniqueFileName);
 
-                const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-                if (!isIOS) {
                     const a = document.createElement("a");
                     a.href = url;
                     a.download = uniqueFileName;
