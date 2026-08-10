@@ -31,7 +31,10 @@
         <div id="doneBox" style="display:none; margin-top:24px; text-align:center;">
             <p style="color:#4ade80; font-size:1.1rem;">✅ Background removed in <span id="finalSeconds">0</span>s</p>
             <p style="color:var(--muted); font-size:0.9rem; margin-top:6px;">Thanks For Waiting.</p>
-            <a id="downloadLink" class="upload-btn" style="margin-top:16px; display:inline-block; font-size:1rem; padding:12px 30px;" download="no_background.png">Download Again</a>
+            <img id="resultPreview" style="max-width:100%; margin-top:16px; border-radius:12px; display:none;">
+            <br>
+            <a id="downloadLink" class="upload-btn" style="margin-top:16px; display:inline-block; font-size:1rem; padding:12px 30px;" download="no_background.png">Download Image</a>
+            <p style="color:var(--muted); font-size:0.8rem; margin-top:10px;">iPhone: tap the image above, then press and hold it, then choose "Add to Photos" or "Save Image".</p>
         </div>
     </form>
 </div>
@@ -107,28 +110,38 @@ document.getElementById("bgForm").addEventListener("submit", function (e) {
 
         if (contentType.includes("image/png")) {
             return response.blob().then(blob => {
-                const url = window.URL.createObjectURL(blob);
+                // Convert blob to a data URL — this works reliably on iOS Safari,
+                // unlike createObjectURL blob links which iOS often fails to open.
+                const reader = new FileReader();
+                reader.onloadend = function () {
+                    const dataUrl = reader.result;
 
-                document.getElementById("loadingBox").style.display = "none";
-                document.getElementById("finalSeconds").innerText = seconds;
-                document.getElementById("doneBox").style.display = "block";
+                    document.getElementById("loadingBox").style.display = "none";
+                    document.getElementById("finalSeconds").innerText = seconds;
+                    document.getElementById("doneBox").style.display = "block";
 
-                const link = document.getElementById("downloadLink");
-                link.href = url;
-                link.setAttribute("download", "no_background.png");
-                link.setAttribute("target", "_blank");
-                link.innerText = "Tap to Download Image";
+                    const preview = document.getElementById("resultPreview");
+                    preview.src = dataUrl;
+                    preview.style.display = "block";
 
-                // Only auto-trigger download on non-iOS devices (desktop, Android)
-                const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-                if (!isIOS) {
-                    const a = document.createElement("a");
-                    a.href = url;
-                    a.download = "no_background.png";
-                    document.body.appendChild(a);
-                    a.click();
-                    document.body.removeChild(a);
-                }
+                    const link = document.getElementById("downloadLink");
+                    link.href = dataUrl;
+                    link.setAttribute("download", "no_background.png");
+
+                    // Auto-trigger download on desktop and Android — works fine there.
+                    // iOS ignores the download attribute, so the user taps the
+                    // image/link and saves it manually via the share sheet.
+                    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+                    if (!isIOS) {
+                        const a = document.createElement("a");
+                        a.href = dataUrl;
+                        a.download = "no_background.png";
+                        document.body.appendChild(a);
+                        a.click();
+                        document.body.removeChild(a);
+                    }
+                };
+                reader.readAsDataURL(blob);
             });
         } else {
             document.getElementById("loadingBox").style.display = "none";
