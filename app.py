@@ -301,26 +301,9 @@ def pdf_to_word():
         output_path = os.path.join(temp_dir, output_filename)
 
         try:
-            try:
-                subprocess.run(
-                    ["libreoffice", "--headless", "--convert-to", "docx",
-                     "--outdir", temp_dir, input_path],
-                    check=True, timeout=120
-                )
-            except (FileNotFoundError, subprocess.CalledProcessError):
-                subprocess.run(
-                    ["soffice", "--headless", "--convert-to", "docx",
-                     "--outdir", temp_dir, input_path],
-                    check=True, timeout=120
-                )
-
-            libreoffice_output = os.path.join(
-                temp_dir, os.path.splitext(file.filename)[0] + ".docx"
-            )
-            if os.path.exists(libreoffice_output):
-                os.rename(libreoffice_output, output_path)
-            else:
-                raise Exception("Output file not found")
+            cv = Converter(input_path)
+            cv.convert(output_path, multi_processing=False, cpu_count=1)
+            cv.close()
         except Exception:
             return render_template("pdf_to_word.html", error="Conversion failed. Please try again.")
 
