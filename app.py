@@ -303,7 +303,7 @@ def pdf_to_word():
 
         try:
             cv = Converter(input_path)
-            cv.convert(output_path)
+            cv.convert(output_path, multi_processing=False, cpu_count=1)
             cv.close()
         except Exception:
             return render_template("pdf_to_word.html", error="Conversion failed. Please try again.")
