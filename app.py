@@ -432,23 +432,32 @@ def webp_to_jpg():
             return render_template("webp_to_jpg.html", error="Conversion failed. Please try again.")
     return render_template("webp_to_jpg.html")
 
-# ---------- 15. Background Remover ----------
+
 @app.route("/background-remover", methods=["GET", "POST"])
 def background_remover():
     if request.method == "POST":
         file = request.files.get("image")
         if not file or file.filename == "":
-            return render_template("background_remover.html", error="Please select an image.")
+            return {"error": "Please select an image."}, 400
         try:
             input_bytes = file.read()
+
+            # Resize large images before processing to speed things up
+            img = Image.open(io.BytesIO(input_bytes))
+            max_dimension = 1500
+            if img.width > max_dimension or img.height > max_dimension:
+                img.thumbnail((max_dimension, max_dimension))
+                buf = io.BytesIO()
+                img.save(buf, format="PNG")
+                input_bytes = buf.getvalue()
+
             output_bytes = remove(input_bytes)
             buf = io.BytesIO(output_bytes)
             buf.seek(0)
-            unique_name = "no_background_" + os.urandom(4).hex() + ".png"
             return send_file(buf, mimetype="image/png",
-                              as_attachment=True, download_name=unique_name)
+                             as_attachment=True, download_name="no_background.png")
         except Exception:
-            return render_template("background_remover.html", error="Background removal failed. Please try again.")
+            return {"error": "Background removal failed. Please try again."}, 500
     return render_template("background_remover.html")
 
 # ---------- 16. Audio Converter ----------
