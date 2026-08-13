@@ -11,23 +11,40 @@
         <input type="number" id="amountInput" value="1">
         <label>From</label>
         <select id="fromCurrency">
-            <option value="USD">USD</option>
-            <option value="INR" selected>INR</option>
-            <option value="EUR">EUR</option>
-            <option value="GBP">GBP</option>
-            <option value="JPY">JPY</option>
+            <option value="USD">USD - US Dollar</option>
+            <option value="INR" selected>INR - Indian Rupee</option>
+            <option value="EUR">EUR - Euro</option>
+            <option value="GBP">GBP - British Pound</option>
+            <option value="JPY">JPY - Japanese Yen</option>
+            <option value="AED">AED - UAE Dirham</option>
+            <option value="AUD">AUD - Australian Dollar</option>
+            <option value="CAD">CAD - Canadian Dollar</option>
+            <option value="SGD">SGD - Singapore Dollar</option>
+            <option value="CNY">CNY - Chinese Yuan</option>
+            <option value="SAR">SAR - Saudi Riyal</option>
         </select>
         <label>To</label>
         <select id="toCurrency">
-            <option value="USD" selected>USD</option>
-            <option value="INR">INR</option>
-            <option value="EUR">EUR</option>
-            <option value="GBP">GBP</option>
-            <option value="JPY">JPY</option>
+            <option value="USD" selected>USD - US Dollar</option>
+            <option value="INR">INR - Indian Rupee</option>
+            <option value="EUR">EUR - Euro</option>
+            <option value="GBP">GBP - British Pound</option>
+            <option value="JPY">JPY - Japanese Yen</option>
+            <option value="AED">AED - UAE Dirham</option>
+            <option value="AUD">AUD - Australian Dollar</option>
+            <option value="CAD">CAD - Canadian Dollar</option>
+            <option value="SGD">SGD - Singapore Dollar</option>
+            <option value="CNY">CNY - Chinese Yuan</option>
+            <option value="SAR">SAR - Saudi Riyal</option>
         </select>
         <button onclick="convertCurrency()" style="margin-top:4px;">Convert</button>
     </form>
     <div class="result-box" id="currResult" style="display:none; margin-top:10px;"></div>
+
+    <div style="max-width:600px; margin:32px auto 0; text-align:left; color:var(--muted); font-size:0.9rem; line-height:1.7;">
+        <p>Our Currency Converter helps you quickly find out how much your money is worth in another country's currency, using live, up-to-date exchange rates. Whether you're planning an international trip, shopping on a foreign website, sending money abroad, or simply keeping track of global exchange rates, this tool gives you instant, accurate conversions without any manual calculations.</p>
+        <p style="margin-top:12px;">Just enter the amount, choose the currency you're converting from, select the currency you want to convert to, and click Convert. The tool pulls real-time rates so you always get an up-to-date result — no sign-up, no fees, and no limits on how many times you can use it.</p>
+    </div>
 </div>
 </div>
 
