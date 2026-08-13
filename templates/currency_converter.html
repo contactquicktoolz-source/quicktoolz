@@ -1,64 +1,306 @@
 {% extends "base.html" %}
 {% block title %}Currency Converter - QuickToolz{% endblock %}
 {% block content %}
+
 <div class="container">
-<div class="tool-hero">
-    <h1>💱 Currency Converter</h1>
-    <p class="subtitle" style="margin-bottom:8px;">Convert between currencies using live exchange rates.</p>
+    <div class="tool-hero currency-tool">
 
-    <form onsubmit="return false;" style="max-width:320px; margin:0 auto;">
-        <label>Amount</label>
-        <input type="number" id="amountInput" value="1">
-        <label>From</label>
-        <select id="fromCurrency" class="currency-select">
-            <option value="USD">USD - US Dollar</option>
-            <option value="INR" selected>INR - Indian Rupee</option>
-            <option value="EUR">EUR - Euro</option>
-            <option value="GBP">GBP - British Pound</option>
-            <option value="JPY">JPY - Japanese Yen</option>
-            <option value="AED">AED - UAE Dirham</option>
-            <option value="AUD">AUD - Australian Dollar</option>
-            <option value="CAD">CAD - Canadian Dollar</option>
-            <option value="SGD">SGD - Singapore Dollar</option>
-            <option value="CNY">CNY - Chinese Yuan</option>
-            <option value="SAR">SAR - Saudi Riyal</option>
-        </select>
-        <label>To</label>
-        <select id="toCurrency" class="currency-select">
-            <option value="USD" selected>USD - US Dollar</option>
-            <option value="INR">INR - Indian Rupee</option>
-            <option value="EUR">EUR - Euro</option>
-            <option value="GBP">GBP - British Pound</option>
-            <option value="JPY">JPY - Japanese Yen</option>
-            <option value="AED">AED - UAE Dirham</option>
-            <option value="AUD">AUD - Australian Dollar</option>
-            <option value="CAD">CAD - Canadian Dollar</option>
-            <option value="SGD">SGD - Singapore Dollar</option>
-            <option value="CNY">CNY - Chinese Yuan</option>
-            <option value="SAR">SAR - Saudi Riyal</option>
-        </select>
-        <button onclick="convertCurrency()" style="margin-top:4px;">Convert</button>
-    </form>
-    <div class="result-box" id="currResult" style="display:none; margin-top:10px;"></div>
+        <div class="currency-icon">💱</div>
 
-    <div style="max-width:600px; margin:32px auto 0; text-align:left; color:var(--muted); font-size:0.9rem; line-height:1.7;">
-        <p>Convert currencies instantly using live exchange rates — no sign-up, no fees, no limits.</p>
+        <h1>Currency Converter</h1>
+        <p class="subtitle">
+            Convert between currencies using live exchange rates.
+        </p>
+
+        <form onsubmit="return false;" class="currency-form">
+
+            <div class="field-group">
+                <label for="amountInput">Amount</label>
+                <div class="amount-wrapper">
+                    <input
+                        type="number"
+                        id="amountInput"
+                        value="1"
+                        min="0"
+                        step="any"
+                        placeholder="Enter amount"
+                    >
+                </div>
+            </div>
+
+            <div class="field-group">
+                <label for="fromCurrency">From</label>
+                <div class="select-wrapper">
+                    <select id="fromCurrency" class="currency-select">
+                        <option value="USD">USD - US Dollar</option>
+                        <option value="INR" selected>INR - Indian Rupee</option>
+                        <option value="EUR">EUR - Euro</option>
+                        <option value="GBP">GBP - British Pound</option>
+                        <option value="JPY">JPY - Japanese Yen</option>
+                        <option value="AED">AED - UAE Dirham</option>
+                        <option value="AUD">AUD - Australian Dollar</option>
+                        <option value="CAD">CAD - Canadian Dollar</option>
+                        <option value="SGD">SGD - Singapore Dollar</option>
+                        <option value="CNY">CNY - Chinese Yuan</option>
+                        <option value="SAR">SAR - Saudi Riyal</option>
+                    </select>
+                </div>
+            </div>
+
+            <button
+                type="button"
+                class="swap-btn"
+                onclick="swapCurrencies()"
+                aria-label="Swap currencies"
+                title="Swap currencies"
+            >
+                ⇅
+            </button>
+
+            <div class="field-group">
+                <label for="toCurrency">To</label>
+                <div class="select-wrapper">
+                    <select id="toCurrency" class="currency-select">
+                        <option value="USD" selected>USD - US Dollar</option>
+                        <option value="INR">INR - Indian Rupee</option>
+                        <option value="EUR">EUR - Euro</option>
+                        <option value="GBP">GBP - British Pound</option>
+                        <option value="JPY">JPY - Japanese Yen</option>
+                        <option value="AED">AED - UAE Dirham</option>
+                        <option value="AUD">AUD - Australian Dollar</option>
+                        <option value="CAD">CAD - Canadian Dollar</option>
+                        <option value="SGD">SGD - Singapore Dollar</option>
+                        <option value="CNY">CNY - Chinese Yuan</option>
+                        <option value="SAR">SAR - Saudi Riyal</option>
+                    </select>
+                </div>
+            </div>
+
+            <button
+                type="button"
+                onclick="convertCurrency()"
+                class="convert-btn"
+            >
+                Convert Currency
+            </button>
+
+        </form>
+
+        <div
+            class="result-box"
+            id="currResult"
+            style="display:none;"
+        ></div>
+
+        <div class="currency-info">
+            <p>
+                Convert currencies instantly using live exchange rates —
+                no sign-up, no fees, no limits.
+            </p>
+        </div>
+
     </div>
-</div>
 </div>
 
 <style>
+.currency-tool {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 42px 20px 36px;
+}
+
+.currency-icon {
+    width: 58px;
+    height: 58px;
+    margin: 0 auto 14px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    background: rgba(99, 102, 241, 0.12);
+    border: 1px solid rgba(99, 102, 241, 0.2);
+}
+
+.currency-tool h1 {
+    margin-bottom: 8px;
+}
+
+.currency-form {
+    width: 100%;
+    max-width: 500px;
+    margin: 30px auto 0;
+    padding: 28px;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.025);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-sizing: border-box;
+}
+
+.field-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.field-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.amount-wrapper,
+.select-wrapper {
+    position: relative;
+}
+
+.currency-form input,
+.currency-form select {
+    width: 100%;
+    height: 50px;
+    box-sizing: border-box;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.035);
+    color: var(--text);
+    font-size: 1rem;
+    padding: 0 16px;
+    outline: none;
+    transition: 0.2s ease;
+}
+
+.currency-form input:focus,
+.currency-form select:focus {
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.12);
+}
+
+.currency-form input::placeholder {
+    color: var(--muted);
+}
+
 .currency-select {
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
+    cursor: pointer;
+    padding-right: 45px !important;
     background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
     background-repeat: no-repeat;
-    background-position: right 14px center;
+    background-position: right 15px center;
     background-size: 16px;
-    padding-right: 40px;
-    border-radius: 10px;
+}
+
+.currency-form select option {
+    background: #111827;
+    color: #fff;
+}
+
+.swap-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    margin: -4px auto 16px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(99, 102, 241, 0.12);
+    color: var(--text);
+    font-size: 22px;
     cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.swap-btn:hover {
+    transform: rotate(180deg);
+    background: rgba(99, 102, 241, 0.2);
+}
+
+.convert-btn {
+    width: 100%;
+    min-height: 52px;
+    margin-top: 4px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #fff;
+    background: #6366f1;
+    transition: 0.2s ease;
+}
+
+.convert-btn:hover {
+    transform: translateY(-1px);
+    opacity: 0.94;
+}
+
+.convert-btn:active {
+    transform: translateY(0);
+}
+
+.result-box {
+    width: 100%;
+    max-width: 500px;
+    margin: 18px auto 0;
+    padding: 18px 20px;
+    box-sizing: border-box;
+    border-radius: 14px;
+    text-align: center;
+    font-size: 1rem;
+    line-height: 1.5;
+    background: rgba(99, 102, 241, 0.08);
+    border: 1px solid rgba(99, 102, 241, 0.2);
+    color: var(--text);
+}
+
+.result-box strong {
+    font-size: 1.15rem;
+}
+
+.currency-info {
+    max-width: 600px;
+    margin: 28px auto 0;
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.9rem;
+    line-height: 1.7;
+}
+
+.currency-info p {
+    margin: 0;
+}
+
+@media (max-width: 600px) {
+
+    .currency-tool {
+        padding: 28px 12px;
+    }
+
+    .currency-form {
+        padding: 20px 16px;
+        margin-top: 24px;
+        border-radius: 16px;
+    }
+
+    .currency-form input,
+    .currency-form select {
+        height: 48px;
+        font-size: 0.95rem;
+    }
+
+    .currency-icon {
+        width: 52px;
+        height: 52px;
+        font-size: 25px;
+    }
+
+    .swap-btn {
+        width: 40px;
+        height: 40px;
+    }
 }
 </style>
 
@@ -69,22 +311,43 @@ async function convertCurrency() {
     const to = document.getElementById("toCurrency").value;
     const box = document.getElementById("currResult");
 
-    if (!amount) { box.textContent = "Enter a valid amount."; box.style.display = "block"; return; }
+    if (!amount) {
+        box.textContent = "Enter a valid amount.";
+        box.style.display = "block";
+        return;
+    }
+
     box.textContent = "Loading...";
     box.style.display = "block";
 
     try {
         const res = await fetch(`https://api.exchangerate-api.com/v4/latest/${from}`);
+
         if (!res.ok) throw new Error("API request failed");
+
         const data = await res.json();
         const rate = data.rates[to];
+
         if (!rate) throw new Error("Currency not found");
+
         const result = amount * rate;
+
         box.innerHTML = `${amount} ${from} = <strong>${result.toFixed(2)} ${to}</strong>`;
+
     } catch (e) {
         console.error("Currency conversion error:", e);
         box.textContent = "Conversion failed. Please try again.";
     }
 }
+
+function swapCurrencies() {
+    const from = document.getElementById("fromCurrency");
+    const to = document.getElementById("toCurrency");
+
+    const currentFrom = from.value;
+    from.value = to.value;
+    to.value = currentFrom;
+}
 </script>
+
 {% endblock %}
