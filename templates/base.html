@@ -5,22 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}QuickToolz - Free Online Tools{% endblock %}</title>
     <meta name="description" content="Free online tools: word counter, QR code generator, unit converter, image compressor and more.">
+
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='logo.png') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
- <!-- Google AdSense -->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7303450474220002"
- crossorigin="anonymous"></script>
 
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-JB9XS3KM6Z"></script>
+    <!-- Google AdSense -->
+    <script async
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7303450474220002"
+        crossorigin="anonymous"></script>
 
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <!-- Google Analytics -->
+    <script async
+        src="https://www.googletagmanager.com/gtag/js?id=G-JB9XS3KM6Z"></script>
 
-  gtag('config', 'G-JB9XS3KM6Z');
-</script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-JB9XS3KM6Z');
+    </script>
+
+    <!-- Monetag MultiTag -->
+    <script src="https://quge5.com/88/tag.min.js"
+            data-zone="273969"
+            async
+            data-cfasync="false"></script>
+</head>
 
 </head>
 <body>
@@ -264,13 +274,13 @@
         ⬅ All Tools
     </a>
 
-  <!-- Ad slot: top banner -->
+<!-- Ad slot: top banner -->
 <div class="ad-slot ad-top">
     <div id="container-26bb513a7e0f17c5b30f02227d353080"></div>
 </div>
 
-    <main>
-        {% block content %}{% endblock %}
+<main>
+    {% block content %}{% endblock %}
     </main>
 
     <!-- Ad slot: bottom banner -->
