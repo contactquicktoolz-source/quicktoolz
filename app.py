@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, send_file
+from flask import Flask, render_template, request, send_file, send_from_directory
 import qrcode
 import io
 import os
@@ -17,14 +17,25 @@ from rembg import remove
 from pydub import AudioSegment
 from pypdf import PdfReader, PdfWriter
 
+
 app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 32 * 1024 * 1024  # 32 MB max upload size
+
+
+# ---------- Service Worker ----------
+@app.route("/sw.js")
+def sw():
+    return send_from_directory(
+        "static",
+        "sw.js",
+        mimetype="application/javascript"
+    )
+
 
 # ---------- Home Page ----------
 @app.route("/")
 def home():
     return render_template("index.html")
-
 
 # ---------- 1. Word / Character Counter ----------
 @app.route("/word-counter", methods=["GET", "POST"])
